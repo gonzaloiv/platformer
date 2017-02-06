@@ -21,7 +21,7 @@ public class Pooler : MonoBehaviour {
   public static GameObjectPool CreateGameObjectPool(string poolName, GameObject prefab, int initialObjectAmount, Transform parent) {
     GameObjectPool gameObjectPool = new GameObjectPool(poolName, prefab, initialObjectAmount, parent);
     AddPool<GameObjectPool>(poolName, gameObjectPool);
-       
+           
     return gameObjectPool;
   }
 

@@ -4,13 +4,12 @@
      / ____/  / /  / /_/ / / /_   / __/  / /_/ / / /     / / / / / //  __/ / /
     /_/      /_/   \__,_/  \__/  /_/     \____/ /_/     /_/ /_/ /_/ \___/ /_/
 
-A 2.5D platform game in Unity.
+A 2.5d platform game in Unity.
 
 ## Assets
 
 * Horse Rubber Mask (Biscuitland).
 * Man in a Suit (Studio New Punch).
-* Japanese Otaku City (Zenrin Co.).
 * Stylized Simple Cartoon City (Area730).
 * Stylized Low Poly Cartoon Environment Pack (Area730).
 * Low Poly: Free Pack (AxeyWorks).
