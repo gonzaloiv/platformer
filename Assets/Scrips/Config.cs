@@ -11,8 +11,18 @@ public class Config {
   public const int Lvl1Size = 10;
 
 
-  // Player 
-
+  // Player Controller
+  public const float PlayerSpeed = 5f;
+  public const float PlayerJumpSpeed = 100f;
+  public const float PlayerAcceleration = 0.2f;
+  public const float PlayerGravityRatio = 1f;	
+ 
   // Enemies
 
+}
+
+
+public enum CollisionLayer {
+  Ground = 8,
+  Player = 9
 }

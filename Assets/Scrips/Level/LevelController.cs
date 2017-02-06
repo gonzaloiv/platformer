@@ -9,6 +9,9 @@ public class LevelController : MonoBehaviour {
   [SerializeField] private GameObject environmentPrefab;
   private Environment environment;
 
+  [SerializeField] private GameObject playerPrefab;
+  private Player player;
+
   private Level level;
 
   #endregion
@@ -18,11 +21,13 @@ public class LevelController : MonoBehaviour {
 
   void Awake() {
     level = GetComponent<Level>();
+    environment = Instantiate(environmentPrefab, transform).GetComponent<Environment>();
+    player = Instantiate(playerPrefab, transform).GetComponent<Player>();
   }
 
   void Start() {
-    environment = Instantiate(environmentPrefab, transform).GetComponent<Environment>();
     environment.Initialize(level.GroundSize);
+    
   }
 
   #endregion
