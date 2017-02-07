@@ -13,11 +13,12 @@ public class LevelController : MonoBehaviour {
   private Player player;
 
   private Level level;
+  private CameraController cameraController;
 
   #endregion
 
 
-  #region Mono Behaviouren
+  #region Mono Behaviour
 
   void Awake() {
     level = GetComponent<Level>();
@@ -27,7 +28,8 @@ public class LevelController : MonoBehaviour {
 
   void Start() {
     environment.Initialize(level.GroundSize);
-    
+    cameraController = level.CameraController;
+    cameraController.Initialize(player.gameObject);
   }
 
   #endregion

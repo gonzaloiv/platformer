@@ -6,6 +6,7 @@ public class Game : MonoBehaviour {
 
   #region Fields
 
+  [SerializeField] private CameraController cameraController;
   [SerializeField] private GameObject levelPrefab;
   private Level level;
 
@@ -14,8 +15,9 @@ public class Game : MonoBehaviour {
   #region Mono Behaviour
 
   void Start() {
+    cameraController = GetComponentInChildren<CameraController>();
     level = Instantiate(levelPrefab, transform).GetComponent<Level>();
-    level.Initialize(Config.Lvl1Size);
+    level.Initialize(cameraController, Config.Lvl1Size);
   }
 
   #endregion

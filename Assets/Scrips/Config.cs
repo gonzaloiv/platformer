@@ -4,6 +4,9 @@ public class Config {
 
   // Global
 
+  // Camera
+  public static Vector3 CameraInitialPosition = new Vector3(0, 10, -23);
+
   // Data
 
   // Level
