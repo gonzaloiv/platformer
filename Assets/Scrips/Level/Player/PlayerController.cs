@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour {
   public Vector3 MoveDirection { get { return moveDirection; } }
   private Vector3 moveDirection = Vector3.zero;
 
+  public bool IsGrounded { get { return isGrounded; } }
+  private bool isGrounded = false;
+
   #endregion
 
   #region Mono Behaviour
@@ -43,6 +46,11 @@ public class PlayerController : MonoBehaviour {
     EventManager.StopListening<LeftInput>(OnLeftInput);
   }
 
+  void OnControllerColliderHit(ControllerColliderHit controllerColliderHit) {
+    if(controllerColliderHit.gameObject.layer == (int) CollisionLayer.Ground)
+      isGrounded = true;
+  }
+
   #endregion
 
   #region Event Behaviour
@@ -56,7 +64,10 @@ public class PlayerController : MonoBehaviour {
   }
 
   void OnSpaceInput(SpaceInput spaceInput) {
-    moveDirection.y = Config.PlayerJumpSpeed * Time.deltaTime;
+    if (isGrounded) {
+      moveDirection.y = Config.PlayerJumpSpeed * Time.deltaTime;
+      isGrounded = false;
+    }
   }
 
   #endregion

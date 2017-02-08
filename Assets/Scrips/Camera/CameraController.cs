@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour {
   #region Fields
 
   private GameObject player;
+  private float maxSpeed;
 
   #endregion
 
@@ -14,6 +15,7 @@ public class CameraController : MonoBehaviour {
   
   public void Initialize(GameObject player) {
     this.player = player;
+    maxSpeed = Config.CameraMaxSpeed;
   }
   
   #endregion
@@ -21,7 +23,7 @@ public class CameraController : MonoBehaviour {
   #region Mono Behaviour
 
   void Update() {
-    transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, transform.position.y,transform.position.z), 0.4f);
+    transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, transform.position.y,transform.position.z), maxSpeed);
   }
 
   #endregion

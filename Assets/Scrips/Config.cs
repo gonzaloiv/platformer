@@ -6,6 +6,7 @@ public class Config {
 
   // Camera
   public static Vector3 CameraInitialPosition = new Vector3(0, 10, -23);
+  public const float CameraMaxSpeed = 0.5f;
 
   // Data
 
@@ -16,9 +17,9 @@ public class Config {
 
   // Player Controller
   public const float PlayerSpeed = 5f;
-  public const float PlayerJumpSpeed = 100f;
+  public const float PlayerJumpSpeed = 120f;
   public const float PlayerAcceleration = 0.2f;
-  public const float PlayerGravityRatio = 1f;	
+  public const float PlayerGravityRatio = 2f;	
  
   // Enemies
 
