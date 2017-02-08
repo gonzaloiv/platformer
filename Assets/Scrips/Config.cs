@@ -14,13 +14,15 @@ public class Config {
   public const int InitialLevelNumber = 1;
   public const int Lvl1Size = 10;
 
-
   // Player Controller
   public const float PlayerSpeed = 5f;
   public const float PlayerJumpSpeed = 120f;
   public const float PlayerAcceleration = 0.2f;
   public const float PlayerGravityRatio = 2f;	
- 
+
+  // Environment
+  public const int EnvironmentTileSize = 6;
+
   // Enemies
 
 }
