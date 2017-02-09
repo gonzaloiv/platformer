@@ -25,8 +25,7 @@ public class PlayerAnimator : MonoBehaviour {
   void FixedUpdate() {
     animationSpeed = Mathf.Abs(controller.velocity.x / 10);
 
-    // Stops animation when direction changes
-    if (transform.rotation.y != previousYRotation)
+    if (transform.rotation.y != previousYRotation) // Stops animation when direction changes
       animationSpeed = 0;  
     previousYRotation = transform.rotation.y;
    

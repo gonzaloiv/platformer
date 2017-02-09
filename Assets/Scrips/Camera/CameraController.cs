@@ -7,7 +7,8 @@ public class CameraController : MonoBehaviour {
   #region Fields
 
   private GameObject player;
-  private float maxSpeed;
+  private float maxSpeed = Config.CameraMaxSpeed;
+  private Vector3 velocity = Vector3.zero;
 
   #endregion
 
@@ -15,7 +16,6 @@ public class CameraController : MonoBehaviour {
   
   public void Initialize(GameObject player) {
     this.player = player;
-    maxSpeed = Config.CameraMaxSpeed;
   }
   
   #endregion
@@ -23,7 +23,8 @@ public class CameraController : MonoBehaviour {
   #region Mono Behaviour
 
   void Update() {
-    transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, transform.position.y,transform.position.z), maxSpeed);
+    Vector3 playerXPosition = new Vector3(player.transform.position.x, transform.position.y,transform.position.z);
+    transform.position = Vector3.SmoothDamp(transform.position, playerXPosition, ref velocity, maxSpeed);
   }
 
   #endregion

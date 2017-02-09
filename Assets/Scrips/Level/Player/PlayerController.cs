@@ -11,10 +11,13 @@ public class PlayerController : MonoBehaviour {
   private CharacterController cc;
 
   public Vector3 MoveDirection { get { return moveDirection; } }
+
   private Vector3 moveDirection = Vector3.zero;
 
   public bool IsGrounded { get { return isGrounded; } }
+
   private bool isGrounded = false;
+  // CharacterController isGrounded doesn't work properly...
 
   #endregion
 
@@ -29,9 +32,8 @@ public class PlayerController : MonoBehaviour {
       transform.rotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0, 0));
     if (moveDirection != Vector3.zero)
       moveDirection -= moveDirection * Config.PlayerAcceleration;
-    // Gravity simulation
-    cc.Move(Physics.gravity * Config.PlayerGravityRatio * Time.deltaTime);
-    cc.Move(moveDirection);
+    cc.Move(Physics.gravity * Config.PlayerGravityRatio * Time.deltaTime); // Gravity simulation
+    cc.Move(moveDirection); // Input movement
   }
 
   void OnEnable() {
@@ -46,8 +48,13 @@ public class PlayerController : MonoBehaviour {
     EventManager.StopListening<LeftInput>(OnLeftInput);
   }
 
+  void OnTriggerEnter(Collider collider) {
+    if (collider.gameObject.name.Contains("LastTile"))
+      EventManager.TriggerEvent(new LastTileEvent());
+  }
+
   void OnControllerColliderHit(ControllerColliderHit controllerColliderHit) {
-    if(controllerColliderHit.gameObject.layer == (int) CollisionLayer.Ground)
+    if (controllerColliderHit.gameObject.layer == (int) CollisionLayer.Ground)
       isGrounded = true;
   }
 

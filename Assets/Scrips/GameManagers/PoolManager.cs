@@ -2,8 +2,4 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolManager : Pooler {
-
-  
-
-}
+public class PoolManager : Pooler {}

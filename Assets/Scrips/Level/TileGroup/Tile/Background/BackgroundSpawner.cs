@@ -24,20 +24,17 @@ public class BackgroundSpawner : MonoBehaviour {
 
   #region Public Behaviour
 
-  public void Spawn(int size) {
-    for (int i = 0; i < size; i++) {
-      SpawnBackground(i, backgroundPool01.PopObject());
-      SpawnBackground(i, backgroundPool02.PopObject());
-    }
+  public void Spawn(float position) {
+    SpawnBackground(backgroundPool01.PopObject(), position);
+    SpawnBackground(backgroundPool02.PopObject(), position);
   }
 
   #endregion
 
   #region Private Behaviour
 
-  private void SpawnBackground(int index, GameObject background) {
-    Mesh mesh = background.GetComponent<MeshFilter>().mesh;
-    background.transform.Translate(index * mesh.bounds.size.x, 0, 0);
+  private void SpawnBackground(GameObject background, float position) {
+    background.transform.Translate(new Vector3(position, 0, 0));
     background.SetActive(true);
   }
 

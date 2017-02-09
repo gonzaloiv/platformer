@@ -6,8 +6,8 @@ public class LevelController : MonoBehaviour {
 
   #region Fields
 
-  [SerializeField] private GameObject environmentPrefab;
-  private Environment environment;
+  [SerializeField] private GameObject tileGroupPrefab;
+  private TileGroupController tileGroupController;
 
   [SerializeField] private GameObject playerPrefab;
   private Player player;
@@ -17,21 +17,43 @@ public class LevelController : MonoBehaviour {
 
   #endregion
 
+  #region Public Behavour
 
-  #region Mono Behaviour
-
-  void Awake() {
-    level = GetComponent<Level>();
-    environment = Instantiate(environmentPrefab, transform).GetComponent<Environment>();
-    player = Instantiate(playerPrefab, transform).GetComponent<Player>();
-  }
-
-  void Start() {
-    environment.Initialize(level.GroundSize);
-    cameraController = level.CameraController;
+  public void Initialize(CameraController cameraController, TileGroup[] tileGroups) {
+    this.level = new Level(Config.InitialLevelNumber, tileGroups);
+    this.cameraController = cameraController;
     cameraController.Initialize(player.gameObject);
   }
 
   #endregion
-	
+
+  #region Mono Behaviour
+
+  void Awake() {
+    tileGroupController = Instantiate(tileGroupPrefab, transform).GetComponent<TileGroupController>();
+    player = Instantiate(playerPrefab, transform).GetComponent<Player>();
+  }
+
+  void Start () {
+    tileGroupController.TileGroup(Config.TileGroup1Tiles);
+  }  
+
+  void OnEnable() {
+    EventManager.StartListening<LastTileEvent>(OnLastTileEvent);
+  }
+
+  void OnDisable() {
+    EventManager.StopListening<LastTileEvent>(OnLastTileEvent);
+  }
+
+  #endregion
+
+  #region Event Behaviour
+
+  void OnLastTileEvent(LastTileEvent lastTileEvent) {
+    tileGroupController.TileGroup(Config.TileGroup1Tiles);
+  }
+
+  #endregion
+
 }

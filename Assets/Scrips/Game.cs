@@ -8,16 +8,19 @@ public class Game : MonoBehaviour {
 
   [SerializeField] private CameraController cameraController;
   [SerializeField] private GameObject levelPrefab;
-  private Level level;
+  private LevelController levelController;
 
   #endregion
 
   #region Mono Behaviour
 
-  void Start() {
+  void Awake() {
     cameraController = GetComponentInChildren<CameraController>();
-    level = Instantiate(levelPrefab, transform).GetComponent<Level>();
-    level.Initialize(cameraController, Config.Lvl1Size);
+    levelController = Instantiate(levelPrefab, transform).GetComponent<LevelController>();
+  }
+
+  void Start() {
+    levelController.Initialize(cameraController, new TileGroup[] { new TileGroup(5), new TileGroup(5), new TileGroup(5) });
   }
 
   #endregion

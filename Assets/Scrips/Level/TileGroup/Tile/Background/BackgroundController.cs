@@ -6,21 +6,22 @@ public class BackgroundController : MonoBehaviour {
 
   #region Fields
 
-  private Background background;
   private BackgroundSpawner backgroundSpawner;
 
   #endregion
 
+  #region Public Behavour
+
+  public void Background(float position) {
+    backgroundSpawner.Spawn(position);
+  }
+
+  #endregion
 
   #region Mono Behaviour
 
   void Awake() {
-    background = GetComponent<Background>();
     backgroundSpawner = GetComponent<BackgroundSpawner>();
-  }
-
-  void Start() {
-    backgroundSpawner.Spawn(background.Size);
   }
 
   #endregion

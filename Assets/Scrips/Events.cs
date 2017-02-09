@@ -16,7 +16,14 @@ public class ReturnInput : UnityEvent {}
 #region Game Mechanics Events 
 #endregion
 
-#region Level Events 
+#region Level Generation Events 
+
+public class LastTileEvent : UnityEvent {
+  public LastTileEvent() {
+    Debug.Log("LastTileEvent");
+  }
+}
+
 #endregion
 
 #region UI Events 

@@ -1,26 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System;
 
-public class Level : MonoBehaviour {
+public struct Level {
 
   #region Fields
 
-  private int levelNumber = Config.InitialLevelNumber;
+  public int LevelNumber { get { return levelNumber; } }
+  private int levelNumber;
 
-  public CameraController CameraController { get { return this.cameraController; } }
-  private CameraController cameraController;
-
-  public int GroundSize { get { return groundSize; } }
-  private int groundSize;
+  public TileGroup[] TileGroups { get { return tileGroups; } }
+  private TileGroup[] tileGroups;
 
   #endregion
  
   #region Public Behaviour
 
-  public void Initialize(CameraController cameraController, int groundSize) {
-    this.cameraController = cameraController;
-    this.groundSize = groundSize;
+  public Level(int levelNumber, TileGroup[] tileGroups) {
+    this.levelNumber = levelNumber;
+    this.tileGroups = tileGroups;
   }
 
   #endregion

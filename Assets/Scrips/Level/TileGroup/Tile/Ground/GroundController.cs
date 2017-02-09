@@ -6,21 +6,22 @@ public class GroundController : MonoBehaviour {
 
   #region Fields
 
-  private Ground ground;
   private GroundSpawner groundSpawner;
 
   #endregion
 
+  #region Public Behaviour
+
+  public void Ground(float position, TileType type) {
+    groundSpawner.Spawn(position, type);
+  }
+
+  #endregion
 
   #region Mono Behaviour
 
   void Awake() {
-    ground = GetComponent<Ground>();
     groundSpawner = GetComponent<GroundSpawner>();
-  }
-
-  void Start() {
-    groundSpawner.Spawn(ground.Size);
   }
 
   #endregion
