@@ -7,10 +7,10 @@ public class TileController : MonoBehaviour {
   #region Fields
 
   [SerializeField] private GameObject groundPrefab;
-  private GroundController groundController;
+  private GroundSpawner groundSpawner;
 
   [SerializeField] private GameObject backgroundPrefab;
-  private BackgroundController backgroundController;
+  private BackgroundSpawner backgroundSpawner;
 
   private Tile previousTile = new Tile(-Config.TileSize, TileType.Regular);
   private Tile currentTile;
@@ -19,13 +19,16 @@ public class TileController : MonoBehaviour {
 
   #region Public Behavour
 
-  public void Tile(int position, TileType tileType) {
+  public List<GameObject> Tile(int position, TileType tileType) {
     currentTile = new Tile(previousTile.Position + Config.TileSize, tileType);
 
-    groundController.Ground(currentTile.Position, currentTile.Type);
-    backgroundController.Background(currentTile.Position);
+    List<GameObject> tileObjects = new List<GameObject>();
+		tileObjects.Add(groundSpawner.Spawn(currentTile.Position, currentTile.Type));
+		backgroundSpawner.Spawn(currentTile.Position).ForEach(x => tileObjects.Add(x));
 
     previousTile = currentTile;
+
+    return tileObjects;
   }
  
   #endregion
@@ -33,8 +36,8 @@ public class TileController : MonoBehaviour {
   #region Mono Behaviour
 
   void Awake() {
-    groundController = Instantiate(groundPrefab, transform).GetComponent<GroundController>();
-    backgroundController = Instantiate(backgroundPrefab, transform).GetComponent<BackgroundController>();
+	groundSpawner = Instantiate(groundPrefab, transform).GetComponent<GroundSpawner>();
+	backgroundSpawner = Instantiate(backgroundPrefab, transform).GetComponent<BackgroundSpawner>();
   }
 
   #endregion

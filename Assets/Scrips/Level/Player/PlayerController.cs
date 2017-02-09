@@ -49,8 +49,10 @@ public class PlayerController : MonoBehaviour {
   }
 
   void OnTriggerEnter(Collider collider) {
-    if (collider.gameObject.name.Contains("LastTile"))
+    if (collider.gameObject.name.Contains("LastTile")) {
+      collider.gameObject.GetComponentInChildren<SphereCollider>().enabled = false; // The trigger just works one time
       EventManager.TriggerEvent(new LastTileEvent());
+    }
   }
 
   void OnControllerColliderHit(ControllerColliderHit controllerColliderHit) {

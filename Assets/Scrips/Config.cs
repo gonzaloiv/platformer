@@ -10,7 +10,7 @@ public class Config {
 
   // World Generation Data
   public const float TileSize = 60.9f;
-  public const int TileGroup1Tiles = 3;
+  public const int TileGroup1Tiles = 4; // 4 is the minimum for the GameObject cleaner
   public const int InitialLevelNumber = 1;
   public const int Lvl1TileGroups = 5;
 

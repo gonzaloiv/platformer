@@ -53,4 +53,12 @@ public class EventManager : Singleton<EventManager> {
 
   #endregion
 
+  #region Mono Behaviour
+
+  void Awake() {
+  
+  }
+
+  #endregion
+
 }

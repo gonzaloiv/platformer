@@ -24,18 +24,23 @@ public class BackgroundSpawner : MonoBehaviour {
 
   #region Public Behaviour
 
-  public void Spawn(float position) {
-    SpawnBackground(backgroundPool01.PopObject(), position);
-    SpawnBackground(backgroundPool02.PopObject(), position);
+  public List<GameObject> Spawn(float position) {
+    List<GameObject> background = new List<GameObject>();
+    background.Add(SpawnBackground(backgroundPool01.PopObject(), position));
+    background.Add(SpawnBackground(backgroundPool02.PopObject(), position));
+
+    return background;
   }
 
   #endregion
 
   #region Private Behaviour
 
-  private void SpawnBackground(GameObject background, float position) {
-    background.transform.Translate(new Vector3(position, 0, 0));
+  private GameObject SpawnBackground(GameObject background, float position) {
+    background.transform.position = new Vector3(position, 0, 0);
     background.SetActive(true);
+
+    return background;
   }
 
   #endregion
