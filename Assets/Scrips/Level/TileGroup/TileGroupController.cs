@@ -64,12 +64,23 @@ public class TileGroupController : MonoBehaviour {
     int tileGroupTilesAmount = tileGroup.TileTypes.Count();
 
     for (int i = 0; i < tileGroupTilesAmount; i++) {
-      if (i == 0)
-        tileGroupTiles.Add(tileController.Tile(i, TileType.First, tileGroupType));
-      else if (i == tileGroupTilesAmount - 2)
-        tileGroupTiles.Add(tileController.Tile(i, TileType.Last, tileGroupType));
+      if (i == 0) {
+        switch(tileGroupType) {
+          case TileGroupType.Left: 
+            tileGroupTiles.Add(tileController.Tile(TileType.FirstLeft, tileGroupType));
+            break;
+          case TileGroupType.Right:
+            tileGroupTiles.Add(tileController.Tile(TileType.FirstRight, tileGroupType));
+            break;
+          default:
+            tileGroupTiles.Add(tileController.Tile(TileType.FirstStraight, tileGroupType));
+            break;
+        }
+      }
+      else if (i == tileGroupTilesAmount - 2) // The Tile before the corner
+        tileGroupTiles.Add(tileController.Tile(TileType.Last, tileGroupType));
       else
-        tileGroupTiles.Add(tileController.Tile(i, tileGroup.TileTypes[i], tileGroupType));
+        tileGroupTiles.Add(tileController.Tile(tileGroup.TileTypes[i], tileGroupType));
     }
 
     return tileGroupTiles;

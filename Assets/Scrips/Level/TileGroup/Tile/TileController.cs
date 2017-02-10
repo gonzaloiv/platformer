@@ -12,17 +12,17 @@ public class TileController : MonoBehaviour {
   [SerializeField] private GameObject backgroundPrefab;
   private BackgroundSpawner backgroundSpawner;
 
-  private Tile previousTile = new Tile(TileType.Regular, TileGroupType.Straight, Config.InitialTilePosition, Config.InitialTileRotation);
+  private Tile previousTile = Config.InitialTile;
   private Tile currentTile;
 
   #endregion
 
   #region Public Behavour
 
-  public List<GameObject> Tile(int index, TileType tileType, TileGroupType tileGroupType) {
+  public List<GameObject> Tile(TileType tileType, TileGroupType tileGroupType) {
     List<GameObject> tileObjects = new List<GameObject>();
 
-    currentTile = TileFactory.TileByTileGroupType(index, previousTile, tileType, tileGroupType);
+    currentTile = TileFactory.TileByTileGroupType(previousTile, tileType, tileGroupType);
     tileObjects.Add(groundSpawner.Spawn(currentTile));
     backgroundSpawner.Spawn(currentTile).ForEach(x => tileObjects.Add(x));
 

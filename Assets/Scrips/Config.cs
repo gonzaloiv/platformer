@@ -11,8 +11,8 @@ public class Config {
 
   // World Generation Data
   public const float TileSize = 60.9f;
-  public static Vector3 InitialTilePosition = new Vector3(-TileSize, 0, 0);
-  public static Vector3 InitialTileRotation = new Vector3(-TileSize, 0, 0);
+  public static Tile InitialTile = new Tile(TileType.Regular, new Vector3(-TileSize, 0, 0), new Vector3(-TileSize, 0, 0));
+
   public static TileType[] TileGroup1Tiles = new TileType[] { TileType.Regular, TileType.Regular, TileType.Regular, TileType.RightCorner }; 
   public const int InitialLevelNumber = 1;
 
@@ -32,7 +32,9 @@ public enum CollisionLayer {
 public enum TileType { // Flag for the prefabs to pool for the tiles
   Regular,
   Last,
-  First,
+  FirstStraight,
+  FirstLeft,
+  FirstRight,
   LeftCorner,
   RightCorner,
 }

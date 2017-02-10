@@ -18,8 +18,6 @@ public class BackgroundSpawner : MonoBehaviour {
   [SerializeField] private GameObject[] rightCornerFrontPrefabs;
   private GameObjectArrayPool rightCornerFrontPool;
 
-  List<GameObject> background = new List<GameObject>();
-
   #endregion
 
   #region Mono Behaviour
@@ -43,16 +41,17 @@ public class BackgroundSpawner : MonoBehaviour {
 
   #region Private Behaviour
 
-  private new List<GameObject> SpawnByType(Tile tile) {
+  private List<GameObject> SpawnByType(Tile tile) { // TODO: hay que ver si hacen falta Spawners diferenciados por tipo de Tile
     List<GameObject> background = new List<GameObject>();
     switch (tile.TileType) {
-      case TileType.First:
-        if (tile.TileGroupType == TileGroupType.Straight) {
-          background.Add(SpawnBackground(regularFrontPool.PopObject(), tile));
-          background.Add(SpawnBackground(regularBackPool.PopObject(), tile));
-        }
-        if (tile.TileGroupType == TileGroupType.Right)
-          background.Add(SpawnBackground(regularFrontPool.PopObject(), tile));
+      case TileType.FirstStraight:
+        background.Add(SpawnBackground(regularFrontPool.PopObject(), tile));
+        background.Add(SpawnBackground(regularBackPool.PopObject(), tile));
+        break;
+      case TileType.FirstRight:
+        background.Add(SpawnBackground(regularFrontPool.PopObject(), tile));
+        break;
+      case TileType.FirstLeft:
         break;
       case TileType.Last:
         background.Add(SpawnBackground(regularFrontPool.PopObject(), tile));

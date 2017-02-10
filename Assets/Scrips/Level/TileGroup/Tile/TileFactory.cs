@@ -14,21 +14,22 @@ public class TileFactory {
 
 	#region Public Behaviour
 
-  public static Tile TileByTileGroupType(int index, Tile previousTile, TileType tileType, TileGroupType tileGroupType) {
+  public static Tile TileByTileGroupType(Tile previousTile, TileType tileType, TileGroupType tileGroupType) {
+
+    if(tileType == TileType.FirstLeft)
+      return new Tile(TileType.FirstLeft, previousTile.Position + new Vector3(24f, 0, 37.8f), new Vector3(0, -90, 0));
+    if(tileType == TileType.FirstRight)
+      return new Tile(TileType.FirstRight, previousTile.Position + new Vector3(24f, 0, -37f), new Vector3(0, 90, 0));
+
     switch(tileGroupType) {
       case TileGroupType.Left:
-        if(tileType == TileType.First)
-          return new Tile(TileType.First, tileGroupType, previousTile.Position + new Vector3(24f, 0, 37.8f), new Vector3(0, -90, 0));
-        else 
-          return new Tile(tileType, tileGroupType, previousTile.Position + RightIncrement, new Vector3(0, -90, 0));
+        return new Tile(tileType, previousTile.Position + LeftIncrement, new Vector3(0, -90, 0));
       case TileGroupType.Right: 
-        if(tileType == TileType.First)
-          return new Tile(TileType.First, tileGroupType, previousTile.Position + new Vector3(24f, 0, -37f), new Vector3(0, -90, 0));
-        else 
-          return new Tile(tileType, tileGroupType, previousTile.Position + LeftIncrement, new Vector3(0, -90, 0));
+        return new Tile(tileType, previousTile.Position + RightIncrement, new Vector3(0, 90, 0));
       default:
-        return new Tile(tileType, tileGroupType, previousTile.Position + StraightIncrement, Vector3.zero);
+        return new Tile(tileType, previousTile.Position + StraightIncrement, Vector3.zero);
     }
+
   }
 
   #endregion
