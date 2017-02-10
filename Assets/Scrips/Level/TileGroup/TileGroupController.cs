@@ -22,18 +22,17 @@ public class TileGroupController : MonoBehaviour {
   #region Public Behaviour
 
   public void TileGroup(TileType[] tiles) {
-    if(tileGroup.TileTypes != null)
-      tileGroupType = SetGroupType(tileGroup.TileTypes.Last());
 
+    if (tileGroup.TileTypes != null)
+      tileGroupType = SetGroupType(tileGroup.TileTypes.Last());
     tileGroup = new TileGroup(tiles);
 
     previousGroupObjects.ForEach(x => x.ForEach(y => y.SetActive(false)));
-
-    nextGroupObjects = new List<List<GameObject>>();
-    nextGroupObjects = TilesByTileGroupType(tileGroup.TileTypes, tileGroupType);
+    nextGroupObjects = TileGroupTiles();
    
     previousGroupObjects = currentGroupObjects;
     currentGroupObjects = nextGroupObjects;
+
   }
 
   #endregion
@@ -48,20 +47,8 @@ public class TileGroupController : MonoBehaviour {
 
   #region Private Behaviour
 
-  private List<List<GameObject>> TilesByTileGroupType(TileType[] tiles, TileGroupType tileGroupType) {
-    List<List<GameObject>> nextTiles = new List<List<GameObject>>();   
-    for (int i = 0; i < tileGroup.TileTypes.Count(); i++)
-      if(i == 0)
-        nextTiles.Add(tileController.Tile(i, TileType.First, tileGroupType));
-      else if(i == tileGroup.TileTypes.Count() - 2)
-        nextTiles.Add(tileController.Tile(i, TileType.Last, tileGroupType));
-      else
-        nextTiles.Add(tileController.Tile(i, tileGroup.TileTypes[i], tileGroupType));
-    return nextTiles;
-  }
-
   private TileGroupType SetGroupType(TileType tileType) { // Sets GroupType depending on the last Tile of the previous TileGroup
-    switch(tileType) {
+    switch (tileType) {
       case TileType.LeftCorner:
         return TileGroupType.Left;
       case TileType.RightCorner:
@@ -69,6 +56,24 @@ public class TileGroupController : MonoBehaviour {
       default:
         return TileGroupType.Straight;
     }
+  }
+
+  private List<List<GameObject>> TileGroupTiles() {
+
+    List<List<GameObject>> tileGroupTiles = new List<List<GameObject>>();   
+    int tileGroupTilesAmount = tileGroup.TileTypes.Count();
+
+    for (int i = 0; i < tileGroupTilesAmount; i++) {
+      if (i == 0)
+        tileGroupTiles.Add(tileController.Tile(i, TileType.First, tileGroupType));
+      else if (i == tileGroupTilesAmount - 2)
+        tileGroupTiles.Add(tileController.Tile(i, TileType.Last, tileGroupType));
+      else
+        tileGroupTiles.Add(tileController.Tile(i, tileGroup.TileTypes[i], tileGroupType));
+    }
+
+    return tileGroupTiles;
+
   }
 
   #endregion
