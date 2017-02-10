@@ -17,16 +17,6 @@ public class LevelController : MonoBehaviour {
 
   #endregion
 
-  #region Public Behavour
-
-  public void Initialize(CameraController cameraController, List<TileGroup> tileGroups) {
-    this.level = new Level(Config.InitialLevelNumber, tileGroups);
-    this.cameraController = cameraController;
-    cameraController.Initialize(player.gameObject);
-  }
-
-  #endregion
-
   #region Mono Behaviour
 
   void Awake() {
@@ -51,7 +41,26 @@ public class LevelController : MonoBehaviour {
   #region Event Behaviour
 
   void OnLastTileEvent(LastTileEvent lastTileEvent) {
-    tileGroupController.TileGroup(Config.TileGroup1Tiles);
+    NextTileGroup();
+  }
+
+  #endregion
+
+
+  #region Public Behavour
+
+  public void Initialize(CameraController cameraController) {
+    level = Config.InitialLevel;
+    this.cameraController = cameraController;
+    cameraController.Initialize(player.gameObject);
+  }
+
+  public void NextTileGroup() {
+    level.TileGroups--;
+    if(level.TileGroups > 0)
+      tileGroupController.TileGroup(Config.TileGroup1Tiles);
+    else
+      Debug.Log("There's no more TileGroups for this Level"); // TODO: A state machine for Level management
   }
 
   #endregion

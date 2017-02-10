@@ -11,13 +11,10 @@ public class PlayerController : MonoBehaviour {
   private CharacterController cc;
 
   public Vector3 MoveDirection { get { return moveDirection; } }
-
   private Vector3 moveDirection = Vector3.zero;
 
   public bool IsGrounded { get { return isGrounded; } }
-
-  private bool isGrounded = false;
-  // CharacterController isGrounded doesn't work properly...
+  private bool isGrounded = false; // CharacterController's isGrounded doesn't work properly
 
   #endregion
 
@@ -28,8 +25,8 @@ public class PlayerController : MonoBehaviour {
   }
 
   void FixedUpdate() {
-    if (Mathf.Abs(moveDirection.x) > 0.1f)
-      transform.rotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0, 0));
+//    if (Mathf.Abs(moveDirection.x) > 0.1f)
+//      transform.rotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0, 0));
     if (moveDirection != Vector3.zero)
       moveDirection -= moveDirection * Config.PlayerAcceleration;
     cc.Move(Physics.gravity * Config.PlayerGravityRatio * Time.deltaTime); // Gravity simulation
@@ -50,8 +47,18 @@ public class PlayerController : MonoBehaviour {
 
   void OnTriggerEnter(Collider collider) {
     if (collider.gameObject.name.Contains("LastTile")) {
-      collider.gameObject.GetComponentInChildren<SphereCollider>().enabled = false; // The trigger just works one time
+      collider.gameObject.GetComponentInChildren<CapsuleCollider>().enabled = false; // The trigger just works one time
       EventManager.TriggerEvent(new LastTileEvent());
+    }
+    if (collider.gameObject.name.Contains("LeftCorner")) {
+      collider.gameObject.GetComponent<CapsuleCollider>().enabled = false; // The trigger just works one time
+      EventManager.TriggerEvent(new TurnLeftEvent());
+      transform.Rotate(new Vector3(0, -90, 0));
+    }
+    if (collider.gameObject.name.Contains("RightCorner")) {
+      collider.gameObject.GetComponent<CapsuleCollider>().enabled = false; // The trigger just works one time
+      EventManager.TriggerEvent(new TurnRightEvent());
+      transform.Rotate(new Vector3(0, 90, 0));
     }
   }
 
@@ -65,11 +72,11 @@ public class PlayerController : MonoBehaviour {
   #region Event Behaviour
 
   void OnRightInput(RightInput rightInput) {
-    moveDirection += Vector3.right * Config.PlayerSpeed * Time.deltaTime;
+    moveDirection += transform.forward * Config.PlayerSpeed * Time.deltaTime;
   }
 
   void OnLeftInput(LeftInput leftInput) {
-    moveDirection += -Vector3.right * Config.PlayerSpeed * Time.deltaTime;
+    moveDirection += -transform.forward * Config.PlayerSpeed * Time.deltaTime;
   }
 
   void OnSpaceInput(SpaceInput spaceInput) {

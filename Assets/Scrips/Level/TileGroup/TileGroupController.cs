@@ -19,10 +19,17 @@ public class TileGroupController : MonoBehaviour {
 
   #endregion
 
+  #region Mono Behaviour
+
+  void Awake() {
+    tileController = Instantiate(tilePrefab, transform).GetComponent<TileController>();
+  }
+
+  #endregion
+
   #region Public Behaviour
 
   public void TileGroup(TileType[] tiles) {
-
     if (tileGroup.TileTypes != null)
       tileGroupType = SetGroupType(tileGroup.TileTypes.Last());
     tileGroup = new TileGroup(tiles);
@@ -33,14 +40,6 @@ public class TileGroupController : MonoBehaviour {
     previousGroupObjects = currentGroupObjects;
     currentGroupObjects = nextGroupObjects;
 
-  }
-
-  #endregion
-
-  #region Mono Behaviour
-
-  void Awake() {
-    tileController = Instantiate(tilePrefab, transform).GetComponent<TileController>();
   }
 
   #endregion

@@ -17,12 +17,24 @@ public class TileController : MonoBehaviour {
 
   #endregion
 
-  #region Public Behavour
+  #region Mono Behaviour
+
+  void Awake() {
+    groundSpawner = Instantiate(groundPrefab, transform).GetComponent<GroundSpawner>();
+    backgroundSpawner = Instantiate(backgroundPrefab, transform).GetComponent<BackgroundSpawner>();
+  }
+
+  #endregion
+
+  #region Public Behaviour
 
   public List<GameObject> Tile(TileType tileType, TileGroupType tileGroupType) {
     List<GameObject> tileObjects = new List<GameObject>();
 
     currentTile = TileFactory.TileByTileGroupType(previousTile, tileType, tileGroupType);
+
+    Debug.Log(currentTile.TileType);
+
     tileObjects.Add(groundSpawner.Spawn(currentTile));
     backgroundSpawner.Spawn(currentTile).ForEach(x => tileObjects.Add(x));
 
@@ -31,15 +43,6 @@ public class TileController : MonoBehaviour {
     return tileObjects;
   }
  
-  #endregion
-
-  #region Mono Behaviour
-
-  void Awake() {
-	  groundSpawner = Instantiate(groundPrefab, transform).GetComponent<GroundSpawner>();
-	  backgroundSpawner = Instantiate(backgroundPrefab, transform).GetComponent<BackgroundSpawner>();
-  }
-
   #endregion
 
 }

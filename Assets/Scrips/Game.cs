@@ -20,11 +20,7 @@ public class Game : MonoBehaviour {
   }
 
   void Start() {
-    levelController.Initialize(cameraController, new List<TileGroup> (new TileGroup[] { 
-      new TileGroup(Config.TileGroup1Tiles), 
-      new TileGroup(Config.TileGroup1Tiles), 
-      new TileGroup(Config.TileGroup1Tiles) 
-    }));
+    levelController.Initialize(cameraController);
   }
 
   #endregion

@@ -14,9 +14,22 @@ public class ReturnInput : UnityEvent {}
 #endregion
 
 #region Game Mechanics Events 
+
+public class TurnLeftEvent : UnityEvent {
+  public TurnLeftEvent() {
+    Debug.Log("TurnLeftEvent");
+  }
+}
+
+public class TurnRightEvent : UnityEvent {
+  public TurnRightEvent() {
+    Debug.Log("TurnRightEvent");
+  }
+}
+
 #endregion
 
-#region Level Generation Events 
+#region Tile Generation Events 
 
 public class LastTileEvent : UnityEvent {
   public LastTileEvent() {

@@ -9,14 +9,14 @@ public struct Level {
   public int LevelNumber { get { return levelNumber; } }
   private int levelNumber;
 
-  public List<TileGroup> TileGroups { get { return tileGroups; } }
-  private List<TileGroup> tileGroups;
+  public int TileGroups { get { return tileGroups; } set { tileGroups = value; } }
+  private int tileGroups;
 
   #endregion
  
   #region Public Behaviour
 
-  public Level(int levelNumber, List<TileGroup> tileGroups) {
+  public Level(int levelNumber, int tileGroups) {
     this.levelNumber = levelNumber;
     this.tileGroups = tileGroups;
   }

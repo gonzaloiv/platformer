@@ -32,11 +32,11 @@ public class GroundSpawner : MonoBehaviour {
   public GameObject Spawn(Tile tile) {
     switch (tile.TileType) {
       case TileType.Last: 
-        return SpawnLastTileGround(regularGroundPool, tile.Position, tile.Rotation);
+        return SpawnTriggerGround(regularGroundPool, tile.Position, tile.Rotation);
       case TileType.LeftCorner: 
-        return SpawnGround(leftCornerGroundPool, tile.Position, tile.Rotation);
+        return SpawnTriggerGround(leftCornerGroundPool, tile.Position, tile.Rotation);
       case TileType.RightCorner: 
-        return SpawnGround(rightCornerGroundPool, tile.Position, tile.Rotation);
+        return SpawnTriggerGround(rightCornerGroundPool, tile.Position, tile.Rotation);
       default: // TileType.Regular and TileType.First
         return SpawnGround(regularGroundPool, tile.Position, tile.Rotation);
     }
@@ -50,15 +50,15 @@ public class GroundSpawner : MonoBehaviour {
     GameObject ground = groundPool.PopObject();
     ground.transform.position = position;
     ground.transform.rotation = Quaternion.Euler(rotation);
-    ground.GetComponentInChildren<SphereCollider>().enabled = false;
+    ground.GetComponentInChildren<CapsuleCollider>().enabled = false;
     ground.SetActive(true);
 
     return ground;
   }
 
-  private GameObject SpawnLastTileGround(GameObjectArrayPool groundPool, Vector3 position, Vector3 rotation) {
+  private GameObject SpawnTriggerGround(GameObjectArrayPool groundPool, Vector3 position, Vector3 rotation) {
     GameObject ground = SpawnGround(groundPool, position, rotation);
-    ground.GetComponentInChildren<SphereCollider>().enabled = true;
+    ground.GetComponentInChildren<CapsuleCollider>().enabled = true;
 
     return ground;
   }

@@ -10,6 +10,9 @@ public class TileFactory {
   private static Vector3 LeftIncrement = new Vector3(0, 0, Config.TileSize);
   private static Vector3 RightIncrement = new Vector3(0, 0, -Config.TileSize);
 
+  private static Vector3 FirstTileLeftIncrement = new Vector3(24f, 0, 37.8f);
+  private static Vector3 FirstTileRightIncrement = new Vector3(24f, 0, -37f);
+
   #endregion
 
 	#region Public Behaviour
@@ -17,9 +20,9 @@ public class TileFactory {
   public static Tile TileByTileGroupType(Tile previousTile, TileType tileType, TileGroupType tileGroupType) {
 
     if(tileType == TileType.FirstLeft)
-      return new Tile(TileType.FirstLeft, previousTile.Position + new Vector3(24f, 0, 37.8f), new Vector3(0, -90, 0));
+      return new Tile(TileType.FirstLeft, previousTile.Position + FirstTileLeftIncrement, new Vector3(0, -90, 0));
     if(tileType == TileType.FirstRight)
-      return new Tile(TileType.FirstRight, previousTile.Position + new Vector3(24f, 0, -37f), new Vector3(0, 90, 0));
+      return new Tile(TileType.FirstRight, previousTile.Position + FirstTileRightIncrement, new Vector3(0, 90, 0));
 
     switch(tileGroupType) {
       case TileGroupType.Left:
