@@ -19,7 +19,7 @@ public class LevelController : MonoBehaviour {
 
   #region Public Behavour
 
-  public void Initialize(CameraController cameraController, TileGroup[] tileGroups) {
+  public void Initialize(CameraController cameraController, List<TileGroup> tileGroups) {
     this.level = new Level(Config.InitialLevelNumber, tileGroups);
     this.cameraController = cameraController;
     cameraController.Initialize(player.gameObject);

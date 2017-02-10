@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class Config {
 
@@ -10,19 +11,17 @@ public class Config {
 
   // World Generation Data
   public const float TileSize = 60.9f;
-  public const int TileGroup1Tiles = 4; // 4 is the minimum for the GameObject cleaner
+  public static Vector3 InitialTilePosition = new Vector3(-TileSize, 0, 0);
+  public static Vector3 InitialTileRotation = new Vector3(-TileSize, 0, 0);
+  public static TileType[] TileGroup1Tiles = new TileType[] { TileType.Regular, TileType.Regular, TileType.Regular, TileType.RightCorner }; 
   public const int InitialLevelNumber = 1;
-  public const int Lvl1TileGroups = 5;
 
   // Player Controller
-  public const float PlayerSpeed = 15f;
+  public const float PlayerSpeed = 10f;
   public const float PlayerJumpSpeed = 120f;
   public const float PlayerAcceleration = 0.2f;
   public const float PlayerGravityRatio = 2f;	
-
-  // Environment
-  public const int EnvironmentTileSize = 6;
-
+ 
 }
 
 public enum CollisionLayer {
@@ -30,13 +29,15 @@ public enum CollisionLayer {
   Player = 9
 }
 
-public enum TileType {
+public enum TileType { // Flag for the prefabs to pool for the tiles
   Regular,
   Last,
-  Corner
+  First,
+  LeftCorner,
+  RightCorner,
 }
 
-public enum CornerType {
+public enum TileGroupType { // Flag for the position and the rotation of the group tiles
   Straight,
   Left,
   Right

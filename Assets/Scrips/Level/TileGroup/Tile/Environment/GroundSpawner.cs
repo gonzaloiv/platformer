@@ -6,33 +6,59 @@ public class GroundSpawner : MonoBehaviour {
 
   #region Fields
 
-  [SerializeField] private GameObject[] groundPrefabs;
-  private GameObjectArrayPool groundPool;
+  [SerializeField] private GameObject[] regularGroundPrefabs;
+  private GameObjectArrayPool regularGroundPool;
+
+  [SerializeField] private GameObject[] leftCornerGroundPrefabs;
+  private GameObjectArrayPool leftCornerGroundPool;
+
+  [SerializeField] private GameObject[] rightCornerGroundPrefabs;
+  private GameObjectArrayPool rightCornerGroundPool;
 
   #endregion
 
   #region Mono Behaviour
 
   void Awake () {
-    groundPool = PoolManager.CreateGameObjectPool("GroundPool", groundPrefabs, 3, transform);
+    regularGroundPool = PoolManager.CreateGameObjectPool("RegularGroundPool", regularGroundPrefabs, 3, transform);
+    leftCornerGroundPool = PoolManager.CreateGameObjectPool("LeftCornerGroundPool", leftCornerGroundPrefabs, 1, transform);
+    rightCornerGroundPool = PoolManager.CreateGameObjectPool("RightCornerGroundPool", rightCornerGroundPrefabs, 1, transform);
   }
 
   #endregion
 
-  #region Public Behaviour
+  #region Public Behaviour 
 
-  public GameObject Spawn(float position, TileType type) {
-    return SpawnGround(groundPool.PopObject(), position, type);
+  public GameObject Spawn(Tile tile) {
+    switch (tile.TileType) {
+      case TileType.Last: 
+        return SpawnLastTileGround(regularGroundPool, tile.Position, tile.Rotation);
+      case TileType.LeftCorner: 
+        return SpawnGround(leftCornerGroundPool, tile.Position, tile.Rotation);
+      case TileType.RightCorner: 
+        return SpawnGround(rightCornerGroundPool, tile.Position, tile.Rotation);
+      default: // TileType.Regular and TileType.First
+        return SpawnGround(regularGroundPool, tile.Position, tile.Rotation);
+    }
   }
 
   #endregion
 
   #region Private Behaviour
 
-  private GameObject SpawnGround(GameObject ground, float position, TileType type) {
-    ground.transform.position = new Vector3(position, 0, 0);
-    ground.GetComponentInChildren<SphereCollider>().enabled =  type == TileType.Last ? true : false; // Enables trigger in the last tile of a group
+  private GameObject SpawnGround(GameObjectArrayPool groundPool, Vector3 position, Vector3 rotation) {
+    GameObject ground = groundPool.PopObject();
+    ground.transform.position = position;
+    ground.transform.rotation = Quaternion.Euler(rotation);
+    ground.GetComponentInChildren<SphereCollider>().enabled = false;
     ground.SetActive(true);
+
+    return ground;
+  }
+
+  private GameObject SpawnLastTileGround(GameObjectArrayPool groundPool, Vector3 position, Vector3 rotation) {
+    GameObject ground = SpawnGround(groundPool, position, rotation);
+    ground.GetComponentInChildren<SphereCollider>().enabled = true;
 
     return ground;
   }

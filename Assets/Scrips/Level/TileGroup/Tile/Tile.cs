@@ -5,19 +5,27 @@ public struct Tile  {
 
   #region Fields
 
-  public float Position { get { return position; } }
-  private float position;
+  public TileType TileType { get { return tileType; } }
+  private TileType tileType;
 
-  public TileType Type { get { return type; } }
-  private TileType type;
+  public TileGroupType TileGroupType { get { return tileGroupType; } }
+  private TileGroupType tileGroupType;
+
+  public Vector3 Position { get { return position; } }
+  private Vector3 position;
+
+  public Vector3 Rotation { get { return rotation; } }
+  private Vector3 rotation;
 
   #endregion
 
   #region Public Behaviour
 
-  public Tile(float position, TileType type) {
+  public Tile(TileType tileType, TileGroupType tileGroupType, Vector3 position, Vector3 rotation) {
+    this.tileType = tileType;
+    this.tileGroupType = tileGroupType;
     this.position = position;
-    this.type = type;
+    this.rotation = rotation;
   }
 
   #endregion

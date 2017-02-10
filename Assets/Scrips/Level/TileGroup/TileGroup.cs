@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 using System;
 
 public struct TileGroup {
 
-  public int Tiles { get { return tiles; } }
-  private int tiles;
+  public TileType[] TileTypes { get { return tileTypes; } }
+  private TileType[] tileTypes;
 
-  public TileGroup(int tiles) {
-    this.tiles = tiles;
+  public TileGroup(TileType[] tileTypes) {
+    this.tileTypes = tileTypes;
   }
 
 }
