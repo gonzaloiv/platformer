@@ -6,10 +6,7 @@ public class StateMachine : MonoBehaviour {
 
   #region Fields
 
-  public virtual State CurrentState { 
-    get { return currentState; } 
-  }
-
+  public virtual State CurrentState { get { return currentState; } }
   private State currentState;
 
   #endregion

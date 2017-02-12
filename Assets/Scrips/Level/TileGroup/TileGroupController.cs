@@ -39,7 +39,6 @@ public class TileGroupController : MonoBehaviour {
    
     previousGroupObjects = currentGroupObjects;
     currentGroupObjects = nextGroupObjects;
-
   }
 
   #endregion

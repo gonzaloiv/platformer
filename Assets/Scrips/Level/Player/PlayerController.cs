@@ -9,12 +9,11 @@ public class PlayerController : MonoBehaviour {
   #region Fields
 
   private CharacterController cc;
+  private Transform playerModel;
 
   public Vector3 MoveDirection { get { return moveDirection; } }
   private Vector3 moveDirection = Vector3.zero;
-
-  public bool IsGrounded { get { return isGrounded; } }
-  private bool isGrounded = false; // CharacterController's isGrounded doesn't work properly
+  private bool isGrounded = false; // CharacterController isGrounded doesn't work properly
 
   #endregion
 
@@ -22,44 +21,50 @@ public class PlayerController : MonoBehaviour {
 
   void Awake() {
     cc = GetComponent<CharacterController>();
+    playerModel = transform.GetChild(0); // Gets the Transform for the 3D Model group
   }
 
   void FixedUpdate() {
-//    if (Mathf.Abs(moveDirection.x) > 0.1f)
-//      transform.rotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0, 0));
+
+    if (cc.velocity != Vector3.zero && isGrounded)
+      playerModel.rotation = Quaternion.LookRotation(cc.velocity);
+
     if (moveDirection != Vector3.zero)
       moveDirection -= moveDirection * Config.PlayerAcceleration;
+
     cc.Move(Physics.gravity * Config.PlayerGravityRatio * Time.deltaTime); // Gravity simulation
     cc.Move(moveDirection); // Input movement
+
   }
 
   void OnEnable() {
-    EventManager.StartListening<SpaceInput>(OnSpaceInput);
     EventManager.StartListening<RightInput>(OnRightInput);
     EventManager.StartListening<LeftInput>(OnLeftInput);
+    EventManager.StartListening<SpaceInput>(OnSpaceInput);
   }
 
   void OnDisable() {
-    EventManager.StopListening<SpaceInput>(OnSpaceInput);
     EventManager.StopListening<RightInput>(OnRightInput);
     EventManager.StopListening<LeftInput>(OnLeftInput);
+    EventManager.StopListening<SpaceInput>(OnSpaceInput);
   }
 
   void OnTriggerEnter(Collider collider) {
+
     if (collider.gameObject.name.Contains("LastTile")) {
-      collider.gameObject.GetComponentInChildren<CapsuleCollider>().enabled = false; // The trigger just works one time
       EventManager.TriggerEvent(new LastTileEvent());
     }
+
     if (collider.gameObject.name.Contains("LeftCorner")) {
-      collider.gameObject.GetComponent<CapsuleCollider>().enabled = false; // The trigger just works one time
       EventManager.TriggerEvent(new TurnLeftEvent());
       transform.Rotate(new Vector3(0, -90, 0));
     }
+
     if (collider.gameObject.name.Contains("RightCorner")) {
-      collider.gameObject.GetComponent<CapsuleCollider>().enabled = false; // The trigger just works one time
       EventManager.TriggerEvent(new TurnRightEvent());
       transform.Rotate(new Vector3(0, 90, 0));
     }
+
   }
 
   void OnControllerColliderHit(ControllerColliderHit controllerColliderHit) {
@@ -76,7 +81,7 @@ public class PlayerController : MonoBehaviour {
   }
 
   void OnLeftInput(LeftInput leftInput) {
-    moveDirection += -transform.forward * Config.PlayerSpeed * Time.deltaTime;
+    moveDirection -= transform.forward * Config.PlayerSpeed * Time.deltaTime;
   }
 
   void OnSpaceInput(SpaceInput spaceInput) {

@@ -10,9 +10,8 @@ public class CameraAnimator : MonoBehaviour {
   private GameObject player;
 
   private float maxSpeed = Config.CameraMaxSpeed;
-  private Vector3 velocity = Vector3.zero;
   private int distanceToPlayer = Config.CameraDistanceToPlayer;
-
+	private Vector3 velocity = Vector3.zero;
 
   #endregion
 
@@ -20,7 +19,7 @@ public class CameraAnimator : MonoBehaviour {
 
   void Update() {
 
-    // Credits: http://answers.unity3d.com/questions/824950/rotate-a-gameobject-to-player-position.html
+    // Based on http://answers.unity3d.com/questions/824950/rotate-a-gameobject-to-player-position.html
     Vector3 direction = player.transform.position - transform.position;
     float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
     Quaternion qto = Quaternion.AngleAxis(angle, Vector3.forward);

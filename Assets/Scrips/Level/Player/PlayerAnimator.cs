@@ -7,10 +7,7 @@ public class PlayerAnimator : MonoBehaviour {
   #region Fields
 
   private Animator anim; 
-  private CharacterController controller;
-
-  private float animationSpeed = 0;
-  private float previousYRotation;
+  private PlayerController playerController;
 
   #endregion
 
@@ -18,18 +15,11 @@ public class PlayerAnimator : MonoBehaviour {
 
   void Awake() {
     anim = GetComponent<Animator>();
-    controller = GetComponent<CharacterController>();
-    previousYRotation = transform.rotation.y;
+    playerController = GetComponent<PlayerController>();
   }
 
   void FixedUpdate() {
-    animationSpeed = Mathf.Abs(controller.velocity.x / 10);
-
-    if (transform.rotation.y != previousYRotation) // Stops animation when direction changes
-      animationSpeed = 0;  
-    previousYRotation = transform.rotation.y;
-   
-    anim.SetFloat("Speed", animationSpeed);
+    anim.SetFloat("Speed", playerController.MoveDirection.sqrMagnitude);
   }
 
   void OnEnable() {

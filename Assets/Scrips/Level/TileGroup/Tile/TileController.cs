@@ -32,9 +32,6 @@ public class TileController : MonoBehaviour {
     List<GameObject> tileObjects = new List<GameObject>();
 
     currentTile = TileFactory.TileByTileGroupType(previousTile, tileType, tileGroupType);
-
-    Debug.Log(currentTile.TileType);
-
     tileObjects.Add(groundSpawner.Spawn(currentTile));
     backgroundSpawner.Spawn(currentTile).ForEach(x => tileObjects.Add(x));
 
