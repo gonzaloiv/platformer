@@ -12,6 +12,9 @@ public class TileController : MonoBehaviour {
   [SerializeField] private GameObject backgroundPrefab;
   private BackgroundSpawner backgroundSpawner;
 
+  [SerializeField] private GameObject foregroundPrefab;
+  private ForegroundSpawner foregroundSpawner;
+
   private Tile previousTile = Config.InitialTile;
   private Tile currentTile;
 
@@ -22,6 +25,7 @@ public class TileController : MonoBehaviour {
   void Awake() {
     groundSpawner = Instantiate(groundPrefab, transform).GetComponent<GroundSpawner>();
     backgroundSpawner = Instantiate(backgroundPrefab, transform).GetComponent<BackgroundSpawner>();
+    foregroundSpawner = Instantiate(foregroundPrefab, transform).GetComponent<ForegroundSpawner>();
   }
 
   #endregion
@@ -35,6 +39,7 @@ public class TileController : MonoBehaviour {
     currentTile = TileFactory.Tile(previousTile, tileType, tileGroupType);
     tileObjects.Add(groundSpawner.Spawn(currentTile));
     backgroundSpawner.Spawn(currentTile).ForEach(x => tileObjects.Add(x));
+    tileObjects.Add(foregroundSpawner.Spawn(currentTile));
 
     previousTile = currentTile;
 

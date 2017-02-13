@@ -41,6 +41,7 @@ public class TileGroupController : MonoBehaviour {
     nextGroupObjects = TileGroupFactory.SetTiles(tileController, previousTileGroup, currentTileGroup);
    
     previousGroupObjects.ForEach(x => x.ForEach(y => y.GetComponent<EnvironmentBehaviour>().Disable()));
+
     previousGroupObjects = currentGroupObjects;
     currentGroupObjects = nextGroupObjects;
 
