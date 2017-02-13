@@ -10,30 +10,98 @@ public class TileFactory {
   private static Vector3 LeftIncrement = new Vector3(0, 0, Config.TileSize);
   private static Vector3 RightIncrement = new Vector3(0, 0, -Config.TileSize);
 
-  private static Vector3 FirstTileLeftIncrement = new Vector3(24f, 0, 37.8f);
-  private static Vector3 FirstTileRightIncrement = new Vector3(24f, 0, -37f);
+  // TODO: refactorizar esto con Bit Wise Operators
+  private static Vector3 RightFirstRightIncrement = new Vector3(24f, 0, -37f);
+  private static Vector3 UpFirstRightIncrement = new Vector3(37f, 0, 24f);
+  private static Vector3 DownFirstRightIncrement = new Vector3(-37f, 0, -24f);
+  private static Vector3 LeftFirstRightIncrement = new Vector3(-24f, 0, 37f);
+
+  private static Vector3 RightFirstLeftIncrement = new Vector3(-24f, 0, -37f);
+  private static Vector3 UpFirstLeftIncrement = new Vector3(37f, 0, -24f);
+  private static Vector3 DownFirstLeftIncrement = new Vector3(-37f, 0, 24f);
+  private static Vector3 LeftFirstLeftIncrement = new Vector3(24f, 0, 37f);
 
   #endregion
 
-	#region Public Behaviour
+  #region Public Behaviour
 
-  public static Tile TileByTileGroupType(Tile previousTile, TileType tileType, TileGroupType tileGroupType) {
+  public static Tile Tile(Tile previousTile, TileType tileType, TileGroupType tileGroupType) {
 
-    if(tileType == TileType.FirstLeft)
-      return new Tile(TileType.FirstLeft, tileGroupType, previousTile.Position + FirstTileLeftIncrement, new Vector3(0, -90, 0));
-    if(tileType == TileType.FirstRight)
-      return new Tile(TileType.FirstRight, tileGroupType, previousTile.Position + FirstTileRightIncrement, new Vector3(0, 90, 0));
+    Tile tile = new Tile(tileType, tileGroupType, previousTile.Position, previousTile.Rotation);
 
-    switch(tileGroupType) {
-      case TileGroupType.Left:
-        return new Tile(tileType, tileGroupType, previousTile.Position + LeftIncrement, new Vector3(0, -90, 0));
+    if (tileType == TileType.FirstRight)
+      return FirstRightTile(tile);
+
+    if (tileType == TileType.FirstLeft)
+      return FirstLeftTile(tile);
+
+    switch (tileGroupType) {
       case TileGroupType.Right: 
-        return new Tile(tileType, tileGroupType, previousTile.Position + RightIncrement, new Vector3(0, 90, 0));
+        tile.Position += RightIncrement;
+        break;
       case TileGroupType.Down: 
-        return new Tile(tileType, tileGroupType, previousTile.Position - StraightIncrement, Vector3.zero);
+        tile.Position -= StraightIncrement;
+        break;
+      case TileGroupType.Left:
+        tile.Position += LeftIncrement;
+        break;
       default:
-        return new Tile(tileType, tileGroupType, previousTile.Position + StraightIncrement, Vector3.zero);
+        tile.Position += StraightIncrement;
+        tile.Rotation = Vector3.zero;
+        break;
     }
+
+    return tile;
+
+  }
+
+  #endregion
+
+  #region Private Behaviour
+
+  private static Tile FirstRightTile(Tile tile) {
+
+    tile.Rotation += new Vector3(0, 90, 0);
+
+    switch (tile.TileGroupType) {
+      case TileGroupType.Right: 
+        tile.Position += RightFirstRightIncrement;
+        break;
+      case TileGroupType.Up: 
+        tile.Position += UpFirstRightIncrement;
+        break;
+      case TileGroupType.Down:
+        tile.Position += DownFirstRightIncrement;
+        break;
+      case TileGroupType.Left:
+        tile.Position += LeftFirstRightIncrement;
+        break;
+    } 
+
+    return tile;
+
+  }
+
+  private static Tile FirstLeftTile(Tile tile) {
+
+    tile.Rotation += new Vector3(0, -90, 0);
+
+    switch (tile.TileGroupType) {
+      case TileGroupType.Right: 
+        tile.Position += RightFirstLeftIncrement;
+        break;        
+      case TileGroupType.Up: 
+        tile.Position += UpFirstLeftIncrement;
+        break;
+      case TileGroupType.Down:
+        tile.Position += DownFirstLeftIncrement;
+        break;              
+      case TileGroupType.Left:
+        tile.Position += LeftFirstLeftIncrement;
+        break;            
+    }
+
+    return tile;
 
   }
 

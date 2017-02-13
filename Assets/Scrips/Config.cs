@@ -14,10 +14,10 @@ public class Config {
   public const float TileSize = 60.9f;
   public static Level InitialLevel = new Level(1, 5);
   public static Tile InitialTile = new Tile(TileType.Regular, TileGroupType.Up, new Vector3(-TileSize, 0, 0), new Vector3(-TileSize, 0, 0));
-  public static TileType[] TileGroup1Tiles = new TileType[] { TileType.Regular, TileType.Regular, TileType.Regular, TileType.RightCorner };
+  public static TileType[] TileGroup1Tiles = new TileType[] { TileType.Regular, TileType.Regular, TileType.Regular, TileType.LeftCorner };
 
   // Player
-  public const float PlayerSpeed = 10f;
+  public const float PlayerSpeed = 15f;
   public const float PlayerJumpSpeed = 120f;
   public const float PlayerAcceleration = 0.2f;
   public const float PlayerGravityRatio = 2f;

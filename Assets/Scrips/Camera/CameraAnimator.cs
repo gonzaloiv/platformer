@@ -28,14 +28,17 @@ public class CameraAnimator : MonoBehaviour {
     Quaternion qto2;
 
     switch(cameraController.CameraState) {
-      case CameraState.Left:
-        playerPosition = new Vector3(player.transform.position.x + 30, transform.position.y, player.transform.position.z);
-        qto2 = Quaternion.Euler(0, qto.eulerAngles.y - 90 , 0);
-        break;
       case CameraState.Right:
         playerPosition = new Vector3(player.transform.position.x - 30, transform.position.y, player.transform.position.z);
         qto2 = Quaternion.Euler(0, qto.eulerAngles.y + 90 , 0);
         break;
+      case CameraState.Down:
+        playerPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z + 30);
+        qto2 = Quaternion.Euler(0, qto.eulerAngles.y + 180 , 0);
+        break;
+      case CameraState.Left:
+        playerPosition = new Vector3(player.transform.position.x + 30, transform.position.y, player.transform.position.z);
+        qto2 = Quaternion.Euler(0, qto.eulerAngles.y - 90 , 0);
         break;
       default:
         playerPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z - 30);

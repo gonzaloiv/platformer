@@ -36,14 +36,14 @@ public class CameraController : StateMachine {
 
   #region Event Behaviour
 
-  void OnTurnLeftEvent(TurnLeftEvent turnLeftEvent) {
-    cameraState = cameraState == CameraState.Up ? CameraState.Left : CameraState.Up;
-  }
-
   void OnTurnRightEvent(TurnRightEvent turnRightEvent) {
-    cameraState = cameraState == CameraState.Up ? CameraState.Right : CameraState.Up;
+    cameraState = (int) CameraState < 3 ? (CameraState) ((int) CameraState + 1) : (CameraState) 0;
   }
 
+  void OnTurnLeftEvent(TurnLeftEvent turnLeftEvent) {
+    cameraState = (int) CameraState > 0 ? (CameraState) ((int) CameraState - 1) : (CameraState) 3;
+  }
+  
   #endregion
 
   #region Public Behaviour

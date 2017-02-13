@@ -11,10 +11,10 @@ public struct Tile  {
   public TileGroupType TileGroupType { get { return tileGroupType; } }
   private TileGroupType tileGroupType;
 
-  public Vector3 Position { get { return position; } }
+  public Vector3 Position { get { return position; } set { position = value; } }
   private Vector3 position;
 
-  public Vector3 Rotation { get { return rotation; } }
+  public Vector3 Rotation { get { return rotation; } set { rotation = value; } }
   private Vector3 rotation;
 
   #endregion
@@ -27,6 +27,8 @@ public struct Tile  {
     this.position = position;
     this.rotation = rotation;
   }
+
+
 
   #endregion
 	

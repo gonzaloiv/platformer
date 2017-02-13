@@ -5,13 +5,6 @@ using System.Linq;
 
 public class TileGroupFactory {
 
-  #region Fields
-
-
-
-  #endregion
-
-
   #region Public Behaviour
 
   // Sets GroupType depending on the previous TileGroup
@@ -20,9 +13,9 @@ public class TileGroupFactory {
   public static TileGroupType SetType(TileGroupType previousGroupType, TileType previousCornerType) {
     switch (previousCornerType) {
       case TileType.RightCorner:
-        return (TileGroupType) ((int) previousGroupType + 1);
+        return (int) previousGroupType < 3 ? (TileGroupType) ((int) previousGroupType + 1) : (TileGroupType) 0;
       case TileType.LeftCorner:
-        return (TileGroupType) ((int) previousGroupType - 1);
+        return (int) previousGroupType > 0 ? (TileGroupType) ((int) previousGroupType - 1) : (TileGroupType) 3;
       default:
         return previousGroupType;
     }
