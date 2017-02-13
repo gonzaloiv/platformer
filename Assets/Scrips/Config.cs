@@ -13,8 +13,8 @@ public class Config {
   // World Generation Data
   public const float TileSize = 60.9f;
   public static Level InitialLevel = new Level(1, 5);
-  public static Tile InitialTile = new Tile(TileType.Regular, new Vector3(-TileSize, 0, 0), new Vector3(-TileSize, 0, 0));
-  public static TileType[] TileGroup1Tiles = new TileType[] { TileType.Regular, TileType.Regular, TileType.Regular, TileType.LeftCorner }; 
+  public static Tile InitialTile = new Tile(TileType.Regular, TileGroupType.Up, new Vector3(-TileSize, 0, 0), new Vector3(-TileSize, 0, 0));
+  public static TileType[] TileGroup1Tiles = new TileType[] { TileType.Regular, TileType.Regular, TileType.Regular, TileType.RightCorner };
 
   // Player
   public const float PlayerSpeed = 10f;
@@ -32,21 +32,22 @@ public enum CollisionLayer {
 public enum TileType {
   Regular,
   Last,
-  FirstStraight,
   FirstLeft,
   FirstRight,
   LeftCorner,
-  RightCorner,
+  RightCorner
 }
 
 public enum TileGroupType {
-  Straight,
-  Left,
-  Right
+  Up,
+  Right,
+  Down,
+	Left
 }
 
 public enum CameraState {
-  Straight,
-  Left,
-  Right
+  Up,
+  Right,
+  Down,
+  Left
 }

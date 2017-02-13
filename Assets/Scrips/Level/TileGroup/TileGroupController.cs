@@ -9,13 +9,14 @@ public class TileGroupController : MonoBehaviour {
 
   [SerializeField] GameObject tilePrefab;
   private TileController tileController;
-  private TileGroup tileGroup;
 
   private List<List<GameObject>> previousGroupObjects = new List<List<GameObject>>();
   private List<List<GameObject>> currentGroupObjects = new List<List<GameObject>>();
   private List<List<GameObject>> nextGroupObjects = new List<List<GameObject>>();
 
-  private TileGroupType tileGroupType = TileGroupType.Straight;
+  private TileGroup currentTileGroup;
+  private TileGroup previousTileGroup;
+  private TileGroupType currentTileGroupType = TileGroupType.Up;
 
   #endregion
 
@@ -29,56 +30,67 @@ public class TileGroupController : MonoBehaviour {
 
   #region Public Behaviour
 
-  public void TileGroup(TileType[] tiles) {
-    if (tileGroup.TileTypes != null)
-      tileGroupType = SetGroupType(tileGroup.TileTypes.Last());
-    tileGroup = new TileGroup(tiles);
+  public void TileGroup(TileType[] currentTiles) {
+
+    previousTileGroup = currentTileGroup;
+
+    if (previousTileGroup.TileTypes != null)
+      currentTileGroupType = SetGroupType(previousTileGroup.Type, previousTileGroup.TileTypes.Last());
+    
+    currentTileGroup = new TileGroup(currentTileGroupType, currentTiles);
 
     previousGroupObjects.ForEach(x => x.ForEach(y => y.SetActive(false)));
     nextGroupObjects = TileGroupTiles();
    
     previousGroupObjects = currentGroupObjects;
     currentGroupObjects = nextGroupObjects;
+
   }
 
   #endregion
 
   #region Private Behaviour
 
-  private TileGroupType SetGroupType(TileType tileType) { // Sets GroupType depending on the last Tile of the previous TileGroup
-    switch (tileType) {
-      case TileType.LeftCorner:
-        return TileGroupType.Left;
+  // Sets GroupType depending on the previous TileGroup
+  // TileGroupType: +1 turns right and -1 turns left
+
+  private TileGroupType SetGroupType(TileGroupType previousGroupType, TileType previousCornerType) { 
+    switch (previousCornerType) {
       case TileType.RightCorner:
-        return TileGroupType.Right;
+        return (TileGroupType) ((int) previousGroupType + 1);
+      case TileType.LeftCorner:
+        return (TileGroupType) ((int) previousGroupType - 1);
       default:
-        return TileGroupType.Straight;
+        return previousGroupType;
     }
   }
 
   private List<List<GameObject>> TileGroupTiles() {
 
     List<List<GameObject>> tileGroupTiles = new List<List<GameObject>>();   
-    int tileGroupTilesAmount = tileGroup.TileTypes.Count();
-
+    int tileGroupTilesAmount = currentTileGroup.TileTypes.Count();
+   
     for (int i = 0; i < tileGroupTilesAmount; i++) {
-      if (i == 0) {
-        switch(tileGroupType) {
-          case TileGroupType.Left: 
-            tileGroupTiles.Add(tileController.Tile(TileType.FirstLeft, tileGroupType));
+
+      if (i == 0 && previousTileGroup.TileTypes != null) {
+        switch (previousTileGroup.TileTypes.Last()) {
+          case TileType.RightCorner:
+            tileGroupTiles.Add(tileController.Tile(TileType.FirstRight, currentTileGroupType));
             break;
-          case TileGroupType.Right:
-            tileGroupTiles.Add(tileController.Tile(TileType.FirstRight, tileGroupType));
+          case TileType.LeftCorner: 
+            tileGroupTiles.Add(tileController.Tile(TileType.FirstLeft, currentTileGroupType));
             break;
           default:
-            tileGroupTiles.Add(tileController.Tile(TileType.FirstStraight, tileGroupType));
+            tileGroupTiles.Add(tileController.Tile(TileType.Regular, currentTileGroupType));
             break;
         }
       }
-      else if (i == tileGroupTilesAmount - 2) // The Tile before the corner
-        tileGroupTiles.Add(tileController.Tile(TileType.Last, tileGroupType));
+
+      if (i == tileGroupTilesAmount - 2) // The Tile before the corner
+        tileGroupTiles.Add(tileController.Tile(TileType.Last, currentTileGroupType));
       else
-        tileGroupTiles.Add(tileController.Tile(tileGroup.TileTypes[i], tileGroupType));
+        tileGroupTiles.Add(tileController.Tile(currentTileGroup.TileTypes[i], currentTileGroupType));
+
     }
 
     return tileGroupTiles;

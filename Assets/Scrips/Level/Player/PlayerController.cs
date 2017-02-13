@@ -29,8 +29,8 @@ public class PlayerController : MonoBehaviour {
     if (cc.velocity != Vector3.zero && isGrounded)
       playerModel.rotation = Quaternion.LookRotation(cc.velocity);
 
-    if (moveDirection != Vector3.zero)
-      moveDirection -= moveDirection * Config.PlayerAcceleration;
+    if (moveDirection.magnitude > 0)
+      moveDirection = moveDirection - moveDirection * Config.PlayerAcceleration;
 
     cc.Move(Physics.gravity * Config.PlayerGravityRatio * Time.deltaTime); // Gravity simulation
     cc.Move(moveDirection); // Input movement

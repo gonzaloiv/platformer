@@ -44,10 +44,6 @@ public class BackgroundSpawner : MonoBehaviour {
   private List<GameObject> SpawnByType(Tile tile) { // TODO: hay que ver si hacen falta Spawners diferenciados por tipo de Tile
     List<GameObject> background = new List<GameObject>();
     switch (tile.TileType) {
-      case TileType.FirstStraight:
-        background.Add(SpawnBackground(regularFrontPool.PopObject(), tile));
-        background.Add(SpawnBackground(regularBackPool.PopObject(), tile));
-        break;
       case TileType.FirstRight:
         background.Add(SpawnBackground(regularFrontPool.PopObject(), tile));
         break;

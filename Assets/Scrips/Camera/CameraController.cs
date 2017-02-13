@@ -12,7 +12,7 @@ public class CameraController : StateMachine {
   private CameraAnimator cameraAnimator;
 
   public CameraState CameraState { get { return cameraState; } }
-  private CameraState cameraState = CameraState.Straight;
+  private CameraState cameraState = CameraState.Up;
  
   #endregion
 
@@ -37,11 +37,11 @@ public class CameraController : StateMachine {
   #region Event Behaviour
 
   void OnTurnLeftEvent(TurnLeftEvent turnLeftEvent) {
-    cameraState = cameraState == CameraState.Straight ? CameraState.Left : CameraState.Straight;
+    cameraState = cameraState == CameraState.Up ? CameraState.Left : CameraState.Up;
   }
 
   void OnTurnRightEvent(TurnRightEvent turnRightEvent) {
-    cameraState = cameraState == CameraState.Straight ? CameraState.Right : CameraState.Straight;
+    cameraState = cameraState == CameraState.Up ? CameraState.Right : CameraState.Up;
   }
 
   #endregion

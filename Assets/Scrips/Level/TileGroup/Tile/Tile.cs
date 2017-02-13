@@ -8,6 +8,9 @@ public struct Tile  {
   public TileType TileType { get { return tileType; } }
   private TileType tileType;
 
+  public TileGroupType TileGroupType { get { return tileGroupType; } }
+  private TileGroupType tileGroupType;
+
   public Vector3 Position { get { return position; } }
   private Vector3 position;
 
@@ -18,7 +21,8 @@ public struct Tile  {
 
   #region Public Behaviour
 
-  public Tile(TileType tileType, Vector3 position, Vector3 rotation) {
+  public Tile(TileType tileType, TileGroupType tileGroupType, Vector3 position, Vector3 rotation) {
+    this.tileGroupType = tileGroupType;
     this.tileType = tileType;
     this.position = position;
     this.rotation = rotation;

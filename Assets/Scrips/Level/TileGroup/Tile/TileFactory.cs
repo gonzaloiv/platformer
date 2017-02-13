@@ -20,17 +20,19 @@ public class TileFactory {
   public static Tile TileByTileGroupType(Tile previousTile, TileType tileType, TileGroupType tileGroupType) {
 
     if(tileType == TileType.FirstLeft)
-      return new Tile(TileType.FirstLeft, previousTile.Position + FirstTileLeftIncrement, new Vector3(0, -90, 0));
+      return new Tile(TileType.FirstLeft, tileGroupType, previousTile.Position + FirstTileLeftIncrement, new Vector3(0, -90, 0));
     if(tileType == TileType.FirstRight)
-      return new Tile(TileType.FirstRight, previousTile.Position + FirstTileRightIncrement, new Vector3(0, 90, 0));
+      return new Tile(TileType.FirstRight, tileGroupType, previousTile.Position + FirstTileRightIncrement, new Vector3(0, 90, 0));
 
     switch(tileGroupType) {
       case TileGroupType.Left:
-        return new Tile(tileType, previousTile.Position + LeftIncrement, new Vector3(0, -90, 0));
+        return new Tile(tileType, tileGroupType, previousTile.Position + LeftIncrement, new Vector3(0, -90, 0));
       case TileGroupType.Right: 
-        return new Tile(tileType, previousTile.Position + RightIncrement, new Vector3(0, 90, 0));
+        return new Tile(tileType, tileGroupType, previousTile.Position + RightIncrement, new Vector3(0, 90, 0));
+      case TileGroupType.Down: 
+        return new Tile(tileType, tileGroupType, previousTile.Position - StraightIncrement, Vector3.zero);
       default:
-        return new Tile(tileType, previousTile.Position + StraightIncrement, Vector3.zero);
+        return new Tile(tileType, tileGroupType, previousTile.Position + StraightIncrement, Vector3.zero);
     }
 
   }
