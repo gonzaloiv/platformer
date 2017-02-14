@@ -8,7 +8,8 @@ public class Config {
   // Camera
   public static Vector3 CameraInitialPosition = new Vector3(0, 10, -23);
   public const float CameraMaxSpeed = 0.3f;
-  public const int CameraDistanceToPlayer = 20;
+  public const int CameraDistanceToPlayer = 25;
+  public const float CameraYRotation = 25;
 
   // World Generation Data
   public const float TileSize = 60.9f;
@@ -26,7 +27,8 @@ public class Config {
 
 public enum CollisionLayer {
   Ground = 8,
-  Player = 9
+  Player = 9,
+  Stone = 10
 }
 
 public enum TileType {

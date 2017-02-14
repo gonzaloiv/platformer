@@ -37,7 +37,7 @@ public class GroundSpawner : MonoBehaviour {
         return SpawnTriggerGround(leftCornerGroundPool, tile.Position, tile.Rotation);
       case TileType.RightCorner: 
         return SpawnTriggerGround(rightCornerGroundPool, tile.Position, tile.Rotation);
-      default: // TileType.Regular and TileType.First
+      default:
         return SpawnGround(regularGroundPool, tile.Position, tile.Rotation);
     }
   }

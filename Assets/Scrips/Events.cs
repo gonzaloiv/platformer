@@ -27,6 +27,12 @@ public class TurnRightEvent : UnityEvent {
   }
 }
 
+public class PlayerHitEvent : UnityEvent {
+  public PlayerHitEvent() {
+    Debug.Log("PlayerHitEvent");
+  }
+}
+
 #endregion
 
 #region Tile Generation Events 

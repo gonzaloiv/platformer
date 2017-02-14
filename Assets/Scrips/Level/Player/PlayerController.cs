@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour {
 
   void Awake() {
     cc = GetComponent<CharacterController>();
-    playerModel = transform.GetChild(0); // Gets the Transform for the 3D Model group
+    playerModel = transform.GetChild(0); // Gets the Transform in the 3D Model group
   }
 
   void FixedUpdate() {
@@ -70,6 +70,8 @@ public class PlayerController : MonoBehaviour {
   void OnControllerColliderHit(ControllerColliderHit controllerColliderHit) {
     if (controllerColliderHit.gameObject.layer == (int) CollisionLayer.Ground)
       isGrounded = true;
+    if (controllerColliderHit.gameObject.layer == (int) CollisionLayer.Stone)
+      EventManager.TriggerEvent(new PlayerHitEvent());
   }
 
   #endregion
