@@ -32,11 +32,11 @@ public class ForegroundSpawner : MonoBehaviour {
   public GameObject Spawn(Tile tile) {
     switch (tile.TileType) {
       case TileType.RightCorner:
-        return SpawnForeground(rightCornerForegroundPool.PopObject(), tile);
+        return SpawnForeground(rightCornerForegroundPool.PopRandomObject(), tile);
       case TileType.LeftCorner:
-        return SpawnForeground(leftCornerForegroundPool.PopObject(), tile);
+        return SpawnForeground(leftCornerForegroundPool.PopRandomObject(), tile);
       default:
-        return SpawnForeground(regularForegroundPool.PopObject(), tile);
+        return SpawnForeground(regularForegroundPool.PopRandomObject(), tile);
     }
   }
 

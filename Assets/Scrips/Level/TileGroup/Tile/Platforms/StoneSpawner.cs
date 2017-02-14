@@ -26,7 +26,7 @@ public class StoneSpawner : MonoBehaviour {
     List<GameObject> stones = new List<GameObject>();
 
     for (int i = 0; i < Random.Range(0, 3); i++) {
-      GameObject stone = stonePool.PopObject();
+      GameObject stone = stonePool.PopRandomObject();
       stone.transform.position = SetPosition(tile);
       stone.SetActive(true);
       stones.Add(stone);

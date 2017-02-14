@@ -47,7 +47,7 @@ public class GroundSpawner : MonoBehaviour {
   #region Private Behaviour
 
   private GameObject SpawnGround(GameObjectArrayPool groundPool, Vector3 position, Vector3 rotation) {
-    GameObject ground = groundPool.PopObject();
+    GameObject ground = groundPool.PopRandomObject();
     ground.transform.position = position;
     ground.transform.rotation = Quaternion.Euler(rotation);
     ground.GetComponentInChildren<CapsuleCollider>().enabled = false;

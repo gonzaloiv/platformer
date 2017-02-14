@@ -45,22 +45,22 @@ public class BackgroundSpawner : MonoBehaviour {
     List<GameObject> background = new List<GameObject>();
     switch (tile.TileType) {
       case TileType.FirstRight:
-        background.Add(SpawnBackground(regularFrontPool.PopObject(), tile));
+        background.Add(SpawnBackground(regularFrontPool.PopRandomObject(), tile));
         break;
       case TileType.FirstLeft:
         break;
       case TileType.Last:
-        background.Add(SpawnBackground(regularFrontPool.PopObject(), tile));
+        background.Add(SpawnBackground(regularFrontPool.PopRandomObject(), tile));
         break;
       case TileType.LeftCorner:
-        background.Add(SpawnBackground(leftCornerFrontPool.PopObject(), tile));
+        background.Add(SpawnBackground(leftCornerFrontPool.PopRandomObject(), tile));
         break;
       case TileType.RightCorner:
-        background.Add(SpawnBackground(rightCornerFrontPool.PopObject(), tile));
+        background.Add(SpawnBackground(rightCornerFrontPool.PopRandomObject(), tile));
         break;
       default:
-        background.Add(SpawnBackground(regularFrontPool.PopObject(), tile));
-        background.Add(SpawnBackground(regularBackPool.PopObject(), tile));
+        background.Add(SpawnBackground(regularFrontPool.PopRandomObject(), tile));
+        background.Add(SpawnBackground(regularBackPool.PopRandomObject(), tile));
         break;
     }
     return background;

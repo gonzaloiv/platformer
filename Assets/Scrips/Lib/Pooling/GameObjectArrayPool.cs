@@ -10,8 +10,8 @@ public class GameObjectArrayPool : IPool {
 
   private List<KeyValuePair<int, GameObject>> objects = new List<KeyValuePair<int, GameObject>>();
   private GameObject[] prefabs;
-  GameObject pool;
-  int currentPrefabIndex = 0;
+  private GameObject pool;
+  private int currentPrefabIndex = 0;
 
   #endregion
 
@@ -43,6 +43,10 @@ public class GameObjectArrayPool : IPool {
         return obj;
     }
     return PushObject(prefabIndex, prefabs[prefabIndex]);
+  }
+
+  public GameObject PopRandomObject() {
+    return PopObject(UnityEngine.Random.Range(0, prefabs.Length));
   }
 
   public GameObject PushObject() {
