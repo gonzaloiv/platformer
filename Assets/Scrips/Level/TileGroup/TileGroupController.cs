@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public class TileGroupController : MonoBehaviour {
 
@@ -14,9 +13,7 @@ public class TileGroupController : MonoBehaviour {
   private List<List<GameObject>> currentGroupObjects = new List<List<GameObject>>();
   private List<List<GameObject>> nextGroupObjects = new List<List<GameObject>>();
 
-  private TileGroup currentTileGroup;
-  private TileGroup previousTileGroup;
-  private TileGroupType currentTileGroupType = TileGroupType.Up;
+  private TileGroup tileGroup;
 
   #endregion
 
@@ -30,17 +27,14 @@ public class TileGroupController : MonoBehaviour {
 
   #region Public Behaviour
 
-  public void TileGroup(TileType[] currentTiles) {
+  public void TileGroup() {
 
-    previousTileGroup = currentTileGroup;
+    tileGroup = TileGroupFactory.TileGroup();
 
-    if (previousTileGroup.TileTypes != null)
-      currentTileGroupType = TileGroupFactory.SetType(previousTileGroup.Type, previousTileGroup.TileTypes.Last());
-    
-    currentTileGroup = new TileGroup(currentTileGroupType, currentTiles);
-    nextGroupObjects = TileGroupFactory.SetTiles(tileController, previousTileGroup, currentTileGroup);
+    nextGroupObjects = new List<List<GameObject>>();
+    tileGroup.TilesType.ForEach(tileType => nextGroupObjects.Add(tileController.Tile(tileType, tileGroup.Type)));
 
-    previousGroupObjects.ForEach(x => x.ForEach(y => y.GetComponent<EnvironmentBehaviour>().Disable()));
+    previousGroupObjects.ForEach(x => x.ForEach(y => y.GetComponent<EnvironmentBehaviour>().Disable())); // Object cleaning after two TileGroups
 
     previousGroupObjects = currentGroupObjects;
     currentGroupObjects = nextGroupObjects;

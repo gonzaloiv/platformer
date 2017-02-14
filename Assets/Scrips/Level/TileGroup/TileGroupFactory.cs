@@ -5,51 +5,74 @@ using System.Linq;
 
 public class TileGroupFactory {
 
+  #region Fields
+
+  private static TileGroup currentTileGroup;
+  private static TileGroup previousTileGroup;
+
+  #endregion
+
   #region Public Behaviour
+
+  public static TileGroup TileGroup() {
+    
+    previousTileGroup = currentTileGroup;
+    currentTileGroup = previousTileGroup.TilesType == null ? new TileGroup(TileGroupType.Up, SetTilesType(previousTileGroup)) : new TileGroup(SetType(previousTileGroup), SetTilesType(previousTileGroup));
+
+    return currentTileGroup;
+  }
 
   // Sets GroupType depending on the previous TileGroup
   // TileGroupType: +1 turns right and -1 turns left
 
-  public static TileGroupType SetType(TileGroupType previousGroupType, TileType previousCornerType) {
-    switch (previousCornerType) {
+  public static TileGroupType SetType(TileGroup previousTileGroup) {
+
+    TileGroupType previousTileGroupType = previousTileGroup.Type;
+    TileType previousLastTile = previousTileGroup.TilesType.Last();
+
+    switch (previousLastTile) {
       case TileType.RightCorner:
-        return (int) previousGroupType < 3 ? (TileGroupType) ((int) previousGroupType + 1) : (TileGroupType) 0;
+        return (int) previousTileGroupType < 3 ? (TileGroupType) ((int) previousTileGroupType + 1) : (TileGroupType) 0;
       case TileType.LeftCorner:
-        return (int) previousGroupType > 0 ? (TileGroupType) ((int) previousGroupType - 1) : (TileGroupType) 3;
+        return (int) previousTileGroupType > 0 ? (TileGroupType) ((int) previousTileGroupType - 1) : (TileGroupType) 3;
       default:
-        return previousGroupType;
+        return previousTileGroupType;
     }
   }
 
-  public static List<List<GameObject>> SetTiles(TileController tileController, TileGroup previousTileGroup, TileGroup currentTileGroup) {
+  public static List<TileType> SetTilesType(TileGroup previousTileGroup) {
 
-    List<List<GameObject>> tileGroupTiles = new List<List<GameObject>>();   
-    int tileGroupTilesAmount = currentTileGroup.TileTypes.Count();
+    List<TileType> tilesType = new List<TileType>();   
+    int tileGroupTilesAmount = Random.Range(4, Config.MaxTileGroupTileAmount);
    
     for (int i = 0; i < tileGroupTilesAmount; i++) {
 
-      if (i == 0 && previousTileGroup.TileTypes != null) {
-        switch (previousTileGroup.TileTypes.Last()) {
+      if (i == 0 && previousTileGroup.TilesType != null) {
+        switch (previousTileGroup.TilesType.Last()) {
           case TileType.RightCorner:
-            tileGroupTiles.Add(tileController.Tile(TileType.FirstRight, currentTileGroup.Type));
+            tilesType.Add(TileType.FirstRight);
             break;
           case TileType.LeftCorner: 
-            tileGroupTiles.Add(tileController.Tile(TileType.FirstLeft, currentTileGroup.Type));
+            tilesType.Add(TileType.FirstLeft);
             break;
           default:
-            tileGroupTiles.Add(tileController.Tile(TileType.Regular, currentTileGroup.Type));
+            tilesType.Add(TileType.Regular);
             break;
         }
       }
 
       if (i == tileGroupTilesAmount - 2) // The Tile before the corner
-        tileGroupTiles.Add(tileController.Tile(TileType.Last, currentTileGroup.Type));
+        tilesType.Add(TileType.Last);
+
+      if (i == tileGroupTilesAmount - 1) // Corner Tile
+        tilesType.Add((TileType) Random.Range(0, 3));
+
       else
-        tileGroupTiles.Add(tileController.Tile(currentTileGroup.TileTypes[i], currentTileGroup.Type));
+        tilesType.Add(TileType.Regular);
 
     }
 
-    return tileGroupTiles;
+    return tilesType;
 
   }
 

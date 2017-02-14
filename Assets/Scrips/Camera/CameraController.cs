@@ -6,9 +6,6 @@ public class CameraController : StateMachine {
 
   #region Fields
 
-  public GameObject Player { get { return player; } }
-  private GameObject player;
-  
   private CameraAnimator cameraAnimator;
 
   public CameraState CameraState { get { return cameraState; } }

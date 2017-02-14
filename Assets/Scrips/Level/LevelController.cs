@@ -13,7 +13,6 @@ public class LevelController : MonoBehaviour {
   private Player player;
 
   private Level level;
-  private CameraController cameraController;
 
   #endregion
 
@@ -23,10 +22,6 @@ public class LevelController : MonoBehaviour {
     tileGroupController = Instantiate(tileGroupPrefab, transform).GetComponent<TileGroupController>();
     player = Instantiate(playerPrefab, transform).GetComponent<Player>();
   }
-
-  void Start () {
-    tileGroupController.TileGroup(Config.TileGroup1Tiles);
-  }  
 
   void OnEnable() {
     EventManager.StartListening<LastTileEvent>(OnLastTileEvent);
@@ -46,21 +41,25 @@ public class LevelController : MonoBehaviour {
 
   #endregion
 
-
-  #region Public Behavour
+  #region Public Behaviour
 
   public void Initialize(CameraController cameraController) {
-    level = Config.InitialLevel;
-    this.cameraController = cameraController;
     cameraController.Initialize(player.gameObject);
+    NextLevel(1);
   }
 
-  public void NextTileGroup() {
+  public void NextLevel(int levelNumber) {
+    level = new Level(levelNumber, Random.Range(3, 5));
+    tileGroupController.TileGroup();
+    Debug.Log("Level " + level.LevelNumber);
+  }
+
+  public void NextTileGroup() { // TODO: refact. con state machine
     level.TileGroups--;
-    if(level.TileGroups > 0)
-      tileGroupController.TileGroup(Config.TileGroup1Tiles);
+    if (level.TileGroups > 0)
+      tileGroupController.TileGroup();
     else
-      Debug.Log("There's no more TileGroups for this Level"); // TODO: A state machine for Level management
+      NextLevel(level.LevelNumber + 1);
   }
 
   #endregion

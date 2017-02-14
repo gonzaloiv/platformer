@@ -3,8 +3,6 @@ using System.Collections.Generic;
 
 public class Config {
 
-  // Global
-
   // Camera
   public static Vector3 CameraInitialPosition = new Vector3(0, 10, -23);
   public const float CameraMaxSpeed = 0.3f;
@@ -13,9 +11,8 @@ public class Config {
 
   // World Generation Data
   public const float TileSize = 60.9f;
-  public static Level InitialLevel = new Level(1, 5);
   public static Tile InitialTile = new Tile(TileType.Regular, TileGroupType.Up, new Vector3(-TileSize, 0, 0), new Vector3(-TileSize, 0, 0));
-  public static TileType[] TileGroup1Tiles = new TileType[] { TileType.Regular, TileType.Regular, TileType.Regular, TileType.LeftCorner };
+  public const int MaxTileGroupTileAmount = 8;
 
   // Player
   public const float PlayerSpeed = 10f;
@@ -33,11 +30,11 @@ public enum CollisionLayer {
 
 public enum TileType {
   Regular,
+  LeftCorner,
+  RightCorner,
   Last,
   FirstLeft,
-  FirstRight,
-  LeftCorner,
-  RightCorner
+  FirstRight
 }
 
 public enum TileGroupType {
