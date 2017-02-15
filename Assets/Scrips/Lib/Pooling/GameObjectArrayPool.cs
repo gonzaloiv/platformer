@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,16 +7,17 @@ public class GameObjectArrayPool : IPool {
 
   #region Fields
 
-  private List<KeyValuePair<int, GameObject>> objects = new List<KeyValuePair<int, GameObject>>();
   private GameObject[] prefabs;
   private GameObject pool;
+
+  private List<KeyValuePair<int, GameObject>> objects = new List<KeyValuePair<int, GameObject>>();
   private int currentPrefabIndex = 0;
 
   #endregion
 
   #region Contructors
 
-  public GameObjectArrayPool(string poolName, GameObject[] prefabs, int initialObjectAmount, Transform parent) {
+	public GameObjectArrayPool(string poolName, GameObject[] prefabs, int initialObjectAmount, Transform parent) {
     this.prefabs = prefabs;
     pool = new GameObject(poolName);
     pool.transform.parent = parent;
@@ -55,14 +55,18 @@ public class GameObjectArrayPool : IPool {
   }
 
   public GameObject PushObject(int index, GameObject prefab) {
-    GameObject obj = Pooler.CreatePoolGameObject(prefab, pool.transform);
+    GameObject obj = MonoBehaviour.Instantiate(prefab, pool.transform);
     obj.SetActive(false);
     objects.Add(new KeyValuePair<int, GameObject>(index, obj));
 
     return obj;
   }
 
-  public void Prepopulate(int objectAmount) {
+  #endregion
+
+  #region Private Behaviour
+
+  private void Prepopulate(int objectAmount) {
     int x = 0, y = currentPrefabIndex;
     while (x < objectAmount) {
       PushObject(y, prefabs[y]);

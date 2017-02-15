@@ -20,9 +20,9 @@ public class GroundSpawner : MonoBehaviour {
   #region Mono Behaviour
 
   void Awake () {
-    regularGroundPool = PoolManager.CreateGameObjectPool("RegularGroundPool", regularGroundPrefabs, 3, transform);
-    leftCornerGroundPool = PoolManager.CreateGameObjectPool("LeftCornerGroundPool", leftCornerGroundPrefabs, 1, transform);
-    rightCornerGroundPool = PoolManager.CreateGameObjectPool("RightCornerGroundPool", rightCornerGroundPrefabs, 1, transform);
+    regularGroundPool = new GameObjectArrayPool("RegularGroundPool", regularGroundPrefabs, 3, transform);
+    leftCornerGroundPool = new GameObjectArrayPool("LeftCornerGroundPool", leftCornerGroundPrefabs, 1, transform);
+    rightCornerGroundPool = new GameObjectArrayPool("RightCornerGroundPool", rightCornerGroundPrefabs, 1, transform);
   }
 
   #endregion

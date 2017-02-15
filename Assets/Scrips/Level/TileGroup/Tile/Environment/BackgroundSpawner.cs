@@ -23,10 +23,10 @@ public class BackgroundSpawner : MonoBehaviour {
   #region Mono Behaviour
 
   void Awake() {
-    regularFrontPool = PoolManager.CreateGameObjectPool("RegularFrontPool", regularFrontPrefabs, 4, transform);
-    regularBackPool = PoolManager.CreateGameObjectPool("RegularBackPool", regularBackPrefabs, 4, transform);
-    leftCornerFrontPool = PoolManager.CreateGameObjectPool("LeftCornerFrontPool", leftCornerFrontPrefabs, 1, transform);
-    rightCornerFrontPool = PoolManager.CreateGameObjectPool("RightCornerFrontPool", rightCornerFrontPrefabs, 1, transform);
+    regularFrontPool = new GameObjectArrayPool("RegularFrontPool", regularFrontPrefabs, 4, transform);
+		regularBackPool = new GameObjectArrayPool("RegularBackPool", regularBackPrefabs, 4, transform);
+		leftCornerFrontPool = new GameObjectArrayPool("LeftCornerFrontPool", leftCornerFrontPrefabs, 1, transform);
+		rightCornerFrontPool = new GameObjectArrayPool("RightCornerFrontPool", rightCornerFrontPrefabs, 1, transform);
   }
 
   #endregion

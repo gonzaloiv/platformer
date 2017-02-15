@@ -14,7 +14,7 @@ public class StoneSpawner : MonoBehaviour {
   #region Mono Behaviour
 
   void Awake() {
-    stonePool = PoolManager.CreateGameObjectPool("StonePool", stonePrefabs, 5, transform);
+    stonePool = new GameObjectArrayPool("StonePool", stonePrefabs, 5, transform);
   }
 
   #endregion
