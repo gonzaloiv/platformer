@@ -33,6 +33,13 @@ public class PlayerHitEvent : UnityEvent {
   }
 }
 
+
+public class GameOverEvent : UnityEvent {
+  public GameOverEvent() {
+    Debug.Log("GameOverEvent");
+  }
+}
+
 #endregion
 
 #region Tile Generation Events 

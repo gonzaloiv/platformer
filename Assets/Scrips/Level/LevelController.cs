@@ -10,7 +10,7 @@ public class LevelController : MonoBehaviour {
   private TileGroupController tileGroupController;
 
   [SerializeField] private GameObject playerPrefab;
-  private Player player;
+  private PlayerController playerController;
 
   private Level level;
 
@@ -20,7 +20,7 @@ public class LevelController : MonoBehaviour {
 
   void Awake() {
     tileGroupController = Instantiate(tileGroupPrefab, transform).GetComponent<TileGroupController>();
-    player = Instantiate(playerPrefab, transform).GetComponent<Player>();
+    playerController = Instantiate(playerPrefab, transform).GetComponent<PlayerController>();
   }
 
   void OnEnable() {
@@ -44,7 +44,7 @@ public class LevelController : MonoBehaviour {
   #region Public Behaviour
 
   public void Initialize(CameraController cameraController) {
-    cameraController.Initialize(player.gameObject);
+    cameraController.Initialize(playerController.gameObject);
     NextLevel(1);
   }
 

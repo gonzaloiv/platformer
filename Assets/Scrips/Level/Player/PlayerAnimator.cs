@@ -7,7 +7,7 @@ public class PlayerAnimator : MonoBehaviour {
   #region Fields
 
   private Animator anim; 
-  private PlayerController playerController;
+  private Player player;
 
   #endregion
 
@@ -15,11 +15,11 @@ public class PlayerAnimator : MonoBehaviour {
 
   void Awake() {
     anim = GetComponent<Animator>();
-    playerController = GetComponent<PlayerController>();
+    player = GetComponent<Player>();
   }
 
   void FixedUpdate() {
-    anim.SetFloat("Speed", playerController.MoveDirection.sqrMagnitude);
+    anim.SetFloat("Speed", player.MoveDirection.sqrMagnitude);
   }
 
   void OnEnable() {

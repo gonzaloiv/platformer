@@ -16,7 +16,7 @@ public class Config {
 
   // Player
   public const float PlayerSpeed = 10f;
-  public const float PlayerJumpSpeed = 120f;
+  public const float PlayerJumpSpeed = 70f;
   public const float PlayerAcceleration = 0.2f;
   public const float PlayerGravityRatio = 2f;
  

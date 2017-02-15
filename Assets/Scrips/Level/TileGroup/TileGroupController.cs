@@ -34,7 +34,7 @@ public class TileGroupController : MonoBehaviour {
     nextGroupObjects = new List<List<GameObject>>();
     tileGroup.TilesType.ForEach(tileType => nextGroupObjects.Add(tileController.Tile(tileType, tileGroup.Type)));
 
-    previousGroupObjects.ForEach(x => x.ForEach(y => y.GetComponent<EnvironmentBehaviour>().Disable())); // Object cleaning after two TileGroups
+	previousGroupObjects.ForEach(x => x.ForEach(y => y.GetComponent<TileObjectBehaviour>().Disable())); // Object cleaning after two TileGroups
 
     previousGroupObjects = currentGroupObjects;
     currentGroupObjects = nextGroupObjects;
