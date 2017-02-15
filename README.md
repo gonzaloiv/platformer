@@ -9,9 +9,8 @@ A multidirectional 2.5D endless runner prototype in Unity.
 
 ## Assets
 
-* Stylized Simple Cartoon City (Area730).
-* Stylized Low Poly Cartoon Environment Pack (Area730).
-* Low Poly: Free Pack (AxeyWorks).
+* Stylized Simple Cartoon City [Area730](https://www.assetstore.unity3d.com/en/#!/search/page=1/sortby=popularity/query=publisher:12354).
+* Stylized Low Poly Cartoon Environment Pack [Area730](https://www.assetstore.unity3d.com/en/#!/search/page=1/sortby=popularity/query=publisher:12354).
 
 ## Usage
 
