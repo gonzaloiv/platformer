@@ -28,8 +28,8 @@ public class TurnRightEvent : UnityEvent {
 }
 
 public class PlayerHitEvent : UnityEvent {
-  public PlayerHitEvent() {
-    Debug.Log("PlayerHitEvent");
+  public PlayerHitEvent(int lives) {
+    Debug.Log("PlayerHitEvent, remaining lives: " + lives);
   }
 }
 

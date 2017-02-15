@@ -30,7 +30,6 @@ public class Player : MonoBehaviour {
   void FixedUpdate() {
     if(moveDirection != Vector3.zero && isGrounded)
       playerModel.rotation = Quaternion.LookRotation(moveDirection);
-
     if (moveDirection.magnitude > 0)
       moveDirection = moveDirection - moveDirection * Config.PlayerAcceleration;
   }
@@ -41,8 +40,8 @@ public class Player : MonoBehaviour {
 
   public void LoseLife() {
     lives--;
-    if(lives == 0)
-      EventManager.TriggerEvent(new PlayerHitEvent());
+    if(lives > 0)
+      EventManager.TriggerEvent(new PlayerHitEvent(lives));
     else
       EventManager.TriggerEvent(new GameOverEvent());
   }
