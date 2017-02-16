@@ -25,6 +25,8 @@ public class PlayerCollider : MonoBehaviour {
       player.TurnLeft();
     if (collider.gameObject.name.Contains("RightCorner"))
       player.TurnRight();
+    if (collider.gameObject.layer == (int) CollisionLayer.PowerUp)
+      player.GrowUp();
   }
 
   void OnControllerColliderHit(ControllerColliderHit controllerColliderHit) {

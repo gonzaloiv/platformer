@@ -1,13 +1,37 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class RunnerBehaviour : MonoBehaviour {
 
-	#region Mono Behaviour
-	
-	void Update () {
-		EventManager.TriggerEvent(new RightInput());
-	}
+  #region Fields
 
-	#endregion
+  private bool active = false;
+
+  #endregion
+
+  #region Mono Behaviour
+
+  void Update() {
+    if(active)
+      EventManager.TriggerEvent(new RightInput());
+  }
+
+  void OnEnable() {
+    EventManager.StartListening<ReturnInput>(OnReturnInput);
+  }
+
+  void OnDisable() {
+    EventManager.StopListening<ReturnInput>(OnReturnInput);
+  }
+
+  #endregion
+
+  #region Private Behaviour
+
+  private void OnReturnInput(ReturnInput returnInput) {
+    active = !active;
+  }
+
+  #endregion
 
 }

@@ -56,6 +56,10 @@ public class Player : MonoBehaviour {
     transform.Rotate(0, -90, 0);
   }
 
+  public void GrowUp() {
+    transform.localScale *= Config.PlayerGrowingRatio;
+  }
+
   #endregion
 
 }

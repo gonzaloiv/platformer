@@ -18,6 +18,9 @@ public class TileController : MonoBehaviour {
   [SerializeField] private GameObject stonesPrefab;
   private StoneSpawner stoneSpawner;
 
+  [SerializeField] private GameObject powerUpsPrefab;
+  private PowerUpSpawner powerUpSpawner;
+
   private Tile previousTile = Config.InitialTile;
   private Tile currentTile;
 
@@ -30,6 +33,7 @@ public class TileController : MonoBehaviour {
     backgroundSpawner = Instantiate(backgroundPrefab, transform).GetComponent<BackgroundSpawner>();
     foregroundSpawner = Instantiate(foregroundPrefab, transform).GetComponent<ForegroundSpawner>();
     stoneSpawner = Instantiate(stonesPrefab, transform).GetComponent<StoneSpawner>();
+    powerUpSpawner = Instantiate(powerUpsPrefab, transform).GetComponent<PowerUpSpawner>();
   }
 
   #endregion
@@ -38,17 +42,18 @@ public class TileController : MonoBehaviour {
 
   public List<GameObject> Tile(TileType tileType, TileGroupType tileGroupType) {
 
-    List<GameObject> tileObjects = new List<GameObject>();
-
     currentTile = TileFactory.Tile(previousTile, tileType, tileGroupType);
+
+    List<GameObject> tileObjects = new List<GameObject>();
 
     // ENVIRONMENT
     tileObjects.Add(groundSpawner.Spawn(currentTile));
     backgroundSpawner.Spawn(currentTile).ForEach(x => tileObjects.Add(x));
     tileObjects.Add(foregroundSpawner.Spawn(currentTile));
 
-    // PLATFORMS
+    // GAME OBJECTS
 //    stoneSpawner.Spawn(currentTile).ForEach(x => tileObjects.Add(x));
+    powerUpSpawner.Spawn(currentTile).ForEach(x => tileObjects.Add(x));
 
     previousTile = currentTile;
 

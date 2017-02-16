@@ -5,7 +5,7 @@ public class Config {
 
   // Camera
   public static Vector3 CameraInitialPosition = new Vector3(0, 10, -23);
-  public const float CameraMaxSpeed = 0.4f;
+  public const float CameraMaxSpeed = 0.1f;
   public const int CameraDistanceToPlayer = 25;
   public const float CameraYRotation = 25;
 
@@ -19,6 +19,7 @@ public class Config {
   public const float PlayerJumpSpeed = 70f;
   public const float PlayerAcceleration = 0.2f;
   public const float PlayerGravityRatio = 2f;
+  public const float PlayerGrowingRatio = 1.1f;
  
 }
 
@@ -26,7 +27,8 @@ public enum CollisionLayer {
   Ground = 8,
   Player = 9,
   Platform = 10,
-  Enemy = 11
+  Enemy = 11,
+  PowerUp = 12
 }
 
 public enum TileType {

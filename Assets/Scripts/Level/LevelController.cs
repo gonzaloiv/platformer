@@ -23,8 +23,8 @@ public class LevelController : MonoBehaviour {
 
   void Awake() {
     tileGroupController = Instantiate(tileGroupPrefab, transform).GetComponent<TileGroupController>();
-	  player = Instantiate(playerPrefab, transform);
-	  meteorSpawner = Instantiate(meteorsPrefab, transform).GetComponent<MeteorSpawner>();
+    player = Instantiate(playerPrefab, transform);
+    meteorSpawner = Instantiate(meteorsPrefab, transform).GetComponent<MeteorSpawner>();
   }
 
   void OnEnable() {
@@ -48,8 +48,8 @@ public class LevelController : MonoBehaviour {
   #region Public Behaviour
 
   public void Initialize(CameraController cameraController) {
-  	cameraController.Initialize(player);
-    meteorSpawner.Initialize(player);
+    cameraController.Initialize(player);
+//    meteorSpawner.Initialize(player);
     NextLevel(1);
   }
 
