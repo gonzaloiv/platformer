@@ -6,7 +6,7 @@ public class Game : MonoBehaviour {
 
   #region Fields
 
-  [SerializeField] private CameraController cameraController;
+	private CameraController cameraController;
   [SerializeField] private GameObject levelPrefab;
   private LevelController levelController;
 
