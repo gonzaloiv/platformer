@@ -20,7 +20,7 @@ public class Config {
   public const float PlayerAcceleration = 0.2f;
   public const float PlayerGravityRatio = 2f;
   public const float PlayerGrowingRatio = 1.1f;
- 
+
 }
 
 public enum CollisionLayer {

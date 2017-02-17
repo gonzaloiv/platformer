@@ -16,6 +16,9 @@ public class InputManager : MonoBehaviour {
       if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         EventManager.TriggerEvent(new LeftInput());
 
+      if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        EventManager.TriggerEvent(new UpInput());
+
       if (Input.GetKeyDown(KeyCode.Space))
         EventManager.TriggerEvent(new SpaceInput());
 

@@ -64,8 +64,8 @@ public class TileGroupFactory {
       if (i == tileGroupTilesAmount - 2) // The Tile before the corner
         tilesType.Add(TileType.Last);
 
-      if (i == tileGroupTilesAmount - 1) // Corner Tile
-        tilesType.Add((TileType) Random.Range(0, 3));
+//      if (i == tileGroupTilesAmount - 1) // Corner Tile
+//        tilesType.Add((TileType) Random.Range(0, 3));
 
       else
         tilesType.Add(TileType.Regular);

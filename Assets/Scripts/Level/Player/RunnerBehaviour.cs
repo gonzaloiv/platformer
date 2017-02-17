@@ -13,7 +13,7 @@ public class RunnerBehaviour : MonoBehaviour {
 
   void Update() {
     if(active)
-      EventManager.TriggerEvent(new RightInput());
+      EventManager.TriggerEvent(new UpInput());
   }
 
   void OnEnable() {

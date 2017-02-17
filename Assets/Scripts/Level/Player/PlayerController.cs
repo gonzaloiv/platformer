@@ -28,12 +28,14 @@ public class PlayerController : MonoBehaviour {
   void OnEnable() {
     EventManager.StartListening<RightInput>(OnRightInput);
     EventManager.StartListening<LeftInput>(OnLeftInput);
+    EventManager.StartListening<UpInput>(OnUpInput);
     EventManager.StartListening<SpaceInput>(OnSpaceInput);
   }
 
   void OnDisable() {
     EventManager.StopListening<RightInput>(OnRightInput);
     EventManager.StopListening<LeftInput>(OnLeftInput);
+    EventManager.StopListening<UpInput>(OnUpInput);
     EventManager.StopListening<SpaceInput>(OnSpaceInput);
   }
 
@@ -42,11 +44,18 @@ public class PlayerController : MonoBehaviour {
   #region Event Behaviour
 
   void OnRightInput(RightInput rightInput) {
-    player.MoveDirection += transform.forward * Config.PlayerSpeed * Time.deltaTime;
+    if(transform.position.z > -40.5f)
+     player.MoveDirection += transform.right * Config.PlayerSpeed * Time.deltaTime;
+
   }
 
   void OnLeftInput(LeftInput leftInput) {
-    player.MoveDirection -= transform.forward * Config.PlayerSpeed * Time.deltaTime;
+    if(transform.position.z < 0)
+      player.MoveDirection -= transform.right * Config.PlayerSpeed * Time.deltaTime;
+  }
+
+  void OnUpInput(UpInput upInput) {
+    player.MoveDirection += transform.forward * Config.PlayerSpeed * Time.deltaTime;
   }
 
   void OnSpaceInput(SpaceInput spaceInput) {
