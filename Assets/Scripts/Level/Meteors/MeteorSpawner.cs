@@ -60,7 +60,7 @@ public class MeteorSpawner : MonoBehaviour {
   }
 
   private void SetPosition(GameObject meteor) {
-    meteor.transform.position = player.transform.position + new Vector3(Random.Range(-30, 30), 30, Random.Range(-30,30));
+    meteor.transform.position = player.transform.position + new Vector3(Random.Range(-100, 0), 30, Random.Range(-100,100));
   }
 
   private void SetForce(GameObject meteor) {

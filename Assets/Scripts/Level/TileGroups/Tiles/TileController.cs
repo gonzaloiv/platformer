@@ -18,6 +18,9 @@ public class TileController : MonoBehaviour {
   [SerializeField] private GameObject stonesPrefab;
   private StoneSpawner stoneSpawner;
 
+  [SerializeField] private GameObject carsPrefab;
+  private CarSpawner carSpawner;
+
   [SerializeField] private GameObject powerUpsPrefab;
   private PowerUpSpawner powerUpSpawner;
 
@@ -33,6 +36,7 @@ public class TileController : MonoBehaviour {
     backgroundSpawner = Instantiate(backgroundPrefab, transform).GetComponent<BackgroundSpawner>();
     foregroundSpawner = Instantiate(foregroundPrefab, transform).GetComponent<ForegroundSpawner>();
     stoneSpawner = Instantiate(stonesPrefab, transform).GetComponent<StoneSpawner>();
+    carSpawner = Instantiate(carsPrefab, transform).GetComponent<CarSpawner>();
     powerUpSpawner = Instantiate(powerUpsPrefab, transform).GetComponent<PowerUpSpawner>();
   }
 
@@ -51,8 +55,9 @@ public class TileController : MonoBehaviour {
     backgroundSpawner.Spawn(currentTile).ForEach(x => tileObjects.Add(x));
     tileObjects.Add(foregroundSpawner.Spawn(currentTile));
 
-    // GAME OBJECTS
-//    stoneSpawner.Spawn(currentTile).ForEach(x => tileObjects.Add(x));
+    // LEVEL OBJECTS
+    stoneSpawner.Spawn(currentTile).ForEach(x => tileObjects.Add(x));
+    carSpawner.Spawn(currentTile).ForEach(x => tileObjects.Add(x));
     powerUpSpawner.Spawn(currentTile).ForEach(x => tileObjects.Add(x));
 
     previousTile = currentTile;

@@ -45,7 +45,7 @@ public class PowerUpSpawner : MonoBehaviour {
   private Vector3 SetPosition(Tile tile) {
     switch (tile.TileGroupType) {
       case TileGroupType.Up:
-        return tile.Position + new Vector3(Random.Range(0, 10), yPosition, 0);
+        return tile.Position + new Vector3(Random.Range(0, 10), yPosition, Config.LanePosition[Random.Range(0, 4)]);
       case TileGroupType.Right:
         return tile.Position + new Vector3(0, yPosition, Random.Range(0, 10));
       case TileGroupType.Down:

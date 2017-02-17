@@ -13,6 +13,7 @@ public class Config {
   public const float TileSize = 60.9f;
   public static Tile InitialTile = new Tile(TileType.Regular, TileGroupType.Up, new Vector3(-TileSize, 0, 0), new Vector3(-TileSize, 0, 0));
   public const int MaxTileGroupTileAmount = 8;
+  public static float[] LanePosition = new float[] { 0f, -13.5f, -27f, -40.5f};
 
   // Player
   public const float PlayerSpeed = 10f;

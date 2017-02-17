@@ -44,13 +44,13 @@ public class PlayerController : MonoBehaviour {
   #region Event Behaviour
 
   void OnRightInput(RightInput rightInput) {
-    if(transform.position.z > -40.5f)
+    if(transform.position.z > Config.LanePosition[3])
      player.MoveDirection += transform.right * Config.PlayerSpeed * Time.deltaTime;
 
   }
 
   void OnLeftInput(LeftInput leftInput) {
-    if(transform.position.z < 0)
+    if(transform.position.z < Config.LanePosition[0])
       player.MoveDirection -= transform.right * Config.PlayerSpeed * Time.deltaTime;
   }
 
