@@ -32,7 +32,7 @@ public class PlayerCollider : MonoBehaviour {
   void OnControllerColliderHit(ControllerColliderHit controllerColliderHit) {
     if (controllerColliderHit.gameObject.layer == (int) CollisionLayer.Ground)
       player.IsGrounded = true;
-    if (controllerColliderHit.gameObject.layer == (int) CollisionLayer.Platform)
+    if (controllerColliderHit.gameObject.layer == (int) CollisionLayer.Enemy)
       player.LoseLife();
   }
 

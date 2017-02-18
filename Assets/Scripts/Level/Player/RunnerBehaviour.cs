@@ -17,18 +17,18 @@ public class RunnerBehaviour : MonoBehaviour {
   }
 
   void OnEnable() {
-    EventManager.StartListening<ReturnInput>(OnReturnInput);
+    EventManager.StartListening<EscapeInput>(OnEscapeInput);
   }
 
   void OnDisable() {
-    EventManager.StopListening<ReturnInput>(OnReturnInput);
+    EventManager.StopListening<EscapeInput>(OnEscapeInput);
   }
 
   #endregion
 
   #region Private Behaviour
 
-  private void OnReturnInput(ReturnInput returnInput) {
+  private void OnEscapeInput(EscapeInput escapeInput) {
     active = !active;
   }
 

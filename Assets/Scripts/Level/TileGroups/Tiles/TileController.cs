@@ -47,17 +47,19 @@ public class TileController : MonoBehaviour {
   public List<GameObject> Tile(TileType tileType, TileGroupType tileGroupType) {
 
     currentTile = TileFactory.Tile(previousTile, tileType, tileGroupType);
-
     List<GameObject> tileObjects = new List<GameObject>();
 
     // ENVIRONMENT
     tileObjects.Add(groundSpawner.Spawn(currentTile));
-    backgroundSpawner.Spawn(currentTile).ForEach(x => tileObjects.Add(x));
-    tileObjects.Add(foregroundSpawner.Spawn(currentTile));
+
+    if(tileType != TileType.FirstLeft)
+      tileObjects.Add(backgroundSpawner.Spawn(currentTile));
+    if(tileType != TileType.FirstRight)
+      tileObjects.Add(foregroundSpawner.Spawn(currentTile));
 
     // LEVEL OBJECTS
     stoneSpawner.Spawn(currentTile).ForEach(x => tileObjects.Add(x));
-//    carSpawner.Spawn(currentTile).ForEach(x => tileObjects.Add(x));
+    carSpawner.Spawn(currentTile).ForEach(x => tileObjects.Add(x));
     powerUpSpawner.Spawn(currentTile).ForEach(x => tileObjects.Add(x));
 
     previousTile = currentTile;
@@ -65,7 +67,7 @@ public class TileController : MonoBehaviour {
     return tileObjects;
 
   }
- 
+
   #endregion
 
 }

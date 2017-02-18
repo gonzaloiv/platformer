@@ -8,7 +8,7 @@ public class PowerUpBehaviour : TileObjectBehaviour {
 
   void OnTriggerEnter(Collider collider) {
     if (collider.gameObject.layer == (int) CollisionLayer.Player)
-      Disable();
+      gameObject.SetActive(false);
   }
 
   #endregion

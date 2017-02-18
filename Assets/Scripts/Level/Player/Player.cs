@@ -40,7 +40,8 @@ public class Player : MonoBehaviour {
 
   public void LoseLife() {
     lives--;
-    if(lives > 0)
+    transform.localScale *= 1 / Config.PlayerGrowingRatio;
+    if(transform.localScale.x < 0.3)
       EventManager.TriggerEvent(new PlayerHitEvent(lives));
     else
       EventManager.TriggerEvent(new GameOverEvent());
@@ -58,6 +59,7 @@ public class Player : MonoBehaviour {
 
   public void GrowUp() {
     transform.localScale *= Config.PlayerGrowingRatio;
+    lives++;
   }
 
   #endregion

@@ -49,7 +49,7 @@ public class LevelController : MonoBehaviour {
 
   public void Initialize(CameraController cameraController) {
     cameraController.Initialize(player);
-//    meteorSpawner.Initialize(player);
+    meteorSpawner.Initialize(player);
     NextLevel(1);
   }
 
