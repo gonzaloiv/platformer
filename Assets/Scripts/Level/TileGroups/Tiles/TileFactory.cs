@@ -11,10 +11,10 @@ public class TileFactory {
   private static Vector3 RightIncrement = new Vector3(0, 0, -Config.TileSize);
 
   // TODO: refactorizar esto con Bit Wise Operators
-  private static Vector3 RightFirstRightIncrement = new Vector3(24f, 0, -37f);
-  private static Vector3 UpFirstRightIncrement = new Vector3(37f, 0, 24f);
-  private static Vector3 DownFirstRightIncrement = new Vector3(-37f, 0, -24f);
-  private static Vector3 LeftFirstRightIncrement = new Vector3(-24f, 0, 37f);
+  private static Vector3 RightFirstRightIncrement = new Vector3(64.1f, 0, -77.6f);
+  private static Vector3 UpFirstRightIncrement = new Vector3(77.6f, 0, 64.1f);
+  private static Vector3 DownFirstRightIncrement = new Vector3(-77.6f, 0, -64.1f);
+  private static Vector3 LeftFirstRightIncrement = new Vector3(-64.1f, 0, 77.6f);
 
   private static Vector3 RightFirstLeftIncrement = new Vector3(-24f, 0, -37f);
   private static Vector3 UpFirstLeftIncrement = new Vector3(37f, 0, -24f);

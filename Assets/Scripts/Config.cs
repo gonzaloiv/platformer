@@ -12,7 +12,7 @@ public class Config {
   // World Generation Data
   public const float TileSize = 60.9f;
   public static Tile InitialTile = new Tile(TileType.Regular, TileGroupType.Up, new Vector3(-TileSize, 0, 0), new Vector3(-TileSize, 0, 0));
-  public const int MaxTileGroupTileAmount = 8;
+  public const int MaxTileGroupTileAmount = 3;
   public static float[] LanePosition = new float[] { 0f, -13.5f, -27f, -40.5f};
 
   // Player

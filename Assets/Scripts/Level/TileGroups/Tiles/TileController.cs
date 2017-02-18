@@ -57,7 +57,7 @@ public class TileController : MonoBehaviour {
 
     // LEVEL OBJECTS
     stoneSpawner.Spawn(currentTile).ForEach(x => tileObjects.Add(x));
-    carSpawner.Spawn(currentTile).ForEach(x => tileObjects.Add(x));
+//    carSpawner.Spawn(currentTile).ForEach(x => tileObjects.Add(x));
     powerUpSpawner.Spawn(currentTile).ForEach(x => tileObjects.Add(x));
 
     previousTile = currentTile;
