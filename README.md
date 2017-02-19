@@ -5,7 +5,10 @@
     |__|__|___|_|_|_|_|___|_|    |___|_|___|____/
 
 
-A multidirectional 2.5D endless runner prototype in Unity.
+A 2.5D endless runner prototype in Unity.
+
+![alt Game screenshot.](https://doc-0g-84-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/lvugvla0bfhahqtfa4a5ed9ieiplhids/1487520000000/07917058869424533586/*/0B4Ai2actge7mNmJiQllTamVlNEU)
+
 
 ## Assets
 
@@ -18,6 +21,12 @@ A multidirectional 2.5D endless runner prototype in Unity.
 Just open Game scene in the Unity editor and play.
 
 ## To do
+
+* Music and SFX.
+* Environment variations.
+* Opening scene.
+* Game Over scene.
+* HUD.
 
 ## License
 

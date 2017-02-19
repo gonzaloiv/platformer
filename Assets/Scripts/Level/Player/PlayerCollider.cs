@@ -19,14 +19,19 @@ public class PlayerCollider : MonoBehaviour {
   }
 
   void OnTriggerEnter(Collider collider) {
+
     if (collider.gameObject.name.Contains("LastTile"))
       EventManager.TriggerEvent(new LastTileEvent());
+
     if (collider.gameObject.name.Contains("LeftCorner"))
       player.TurnLeft();
+
     if (collider.gameObject.name.Contains("RightCorner"))
       player.TurnRight();
+
     if (collider.gameObject.layer == (int) CollisionLayer.PowerUp)
       player.GrowUp();
+
   }
 
   void OnControllerColliderHit(ControllerColliderHit controllerColliderHit) {

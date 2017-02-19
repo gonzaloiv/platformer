@@ -6,7 +6,7 @@ public class InputManager : MonoBehaviour {
 
   #region Mono Behaviour
 
-  void FixedUpdate() {
+  void Update() {
 
     if (Time.timeScale != 0) {
 

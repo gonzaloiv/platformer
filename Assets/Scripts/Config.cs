@@ -13,7 +13,7 @@ public class Config {
   public const float TileSize = 60.9f;
   public static Tile InitialTile = new Tile(TileType.Regular, TileGroupType.Up, new Vector3(-TileSize, 0, 0), new Vector3(-TileSize, 0, 0));
   public const int MaxTileGroupTileAmount = 3;
-  public static float[] LanePosition = new float[] { 0f, -13.5f, -27f, -40.5f};
+  public static float[] LanePosition = new float[]{0f, -13.5f, -27f, -40.5f};
 
   public const int MaxTileCars = 1;
   public const int MaxTileStones = 1;
@@ -24,7 +24,7 @@ public class Config {
   public const float PlayerJumpSpeed = 70f;
   public const float PlayerAcceleration = 0.2f;
   public const float PlayerGravityRatio = 2f;
-  public const float PlayerGrowingRatio = 1.1f;
+  public const float PlayerGrowingRatio = 1.2f;
 
 }
 
@@ -52,16 +52,9 @@ public enum TileGroupType {
 	Left
 }
 
-public enum CameraState {
-  Up,
-  Right,
-  Down,
-  Left
-}
-
-public enum MapState {
-  Up,
-  Right,
-  Down,
-  Left
+public enum Direction {
+  North,
+  East,
+  South,
+  West
 }
