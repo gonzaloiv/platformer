@@ -7,7 +7,7 @@
 
 A 2.5D endless runner prototype in Unity.
 
-![alt Game screenshot.](https://doc-0g-84-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/lvugvla0bfhahqtfa4a5ed9ieiplhids/1487520000000/07917058869424533586/*/0B4Ai2actge7mNmJiQllTamVlNEU)
+![alt Game screenshot.](https://drive.google.com/uc?id=0B4Ai2actge7mNmJiQllTamVlNEU)
 
 
 ## Assets
